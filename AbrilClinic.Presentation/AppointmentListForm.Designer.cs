@@ -47,6 +47,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.dgv_appointment);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "AppointmentListForm";
             this.Text = "Lista de Turnos";
             this.Load += new System.EventHandler(this.AppointmentListForm_Load);

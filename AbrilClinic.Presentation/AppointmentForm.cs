@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Abril_Clinica.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,10 +13,17 @@ namespace AbrilClinica.UI
 {
     public partial class AppointmentForm : Form
     {
+        private Patient _patient;
         public AppointmentForm()
         {
             InitializeComponent();
-
         }
+
+        public AppointmentForm(Patient patient): this()
+        {
+            _patient = patient;
+        }
+
+
     }
 }

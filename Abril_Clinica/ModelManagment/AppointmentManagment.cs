@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AbrilClinica.Entities.Data
+namespace AbrilClinica.Entities.ModelManagment
 {
-    // aca yo haria un add / save / delete / etc. ver clase
-    internal class Data
+    internal class AppointmentManagment
     {
     }
 }

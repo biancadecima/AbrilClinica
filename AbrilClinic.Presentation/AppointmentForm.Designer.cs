@@ -28,19 +28,141 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AppointmentForm));
+            this.txb_dniPatient = new System.Windows.Forms.TextBox();
+            this.cbx_specialField = new System.Windows.Forms.ComboBox();
+            this.mtc_appntDate = new System.Windows.Forms.MonthCalendar();
+            this.lbl_dniPatient = new System.Windows.Forms.Label();
+            this.lbl_specialField = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pnl_picture = new System.Windows.Forms.Panel();
+            this.lbl_title = new System.Windows.Forms.Label();
+            this.btn_request = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // txb_dniPatient
+            // 
+            this.txb_dniPatient.Location = new System.Drawing.Point(84, 124);
+            this.txb_dniPatient.Name = "txb_dniPatient";
+            this.txb_dniPatient.Size = new System.Drawing.Size(248, 23);
+            this.txb_dniPatient.TabIndex = 0;
+            // 
+            // cbx_specialField
+            // 
+            this.cbx_specialField.FormattingEnabled = true;
+            this.cbx_specialField.Items.AddRange(new object[] {
+            "Medicina Familiar",
+            "Ginecologia",
+            "Nutricion",
+            "Kinesiologia",
+            "Obstetricia"});
+            this.cbx_specialField.Location = new System.Drawing.Point(84, 188);
+            this.cbx_specialField.Name = "cbx_specialField";
+            this.cbx_specialField.Size = new System.Drawing.Size(248, 23);
+            this.cbx_specialField.TabIndex = 1;
+            // 
+            // mtc_appntDate
+            // 
+            this.mtc_appntDate.Location = new System.Drawing.Point(84, 254);
+            this.mtc_appntDate.Name = "mtc_appntDate";
+            this.mtc_appntDate.TabIndex = 2;
+            // 
+            // lbl_dniPatient
+            // 
+            this.lbl_dniPatient.AutoSize = true;
+            this.lbl_dniPatient.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lbl_dniPatient.Location = new System.Drawing.Point(84, 104);
+            this.lbl_dniPatient.Name = "lbl_dniPatient";
+            this.lbl_dniPatient.Size = new System.Drawing.Size(93, 17);
+            this.lbl_dniPatient.TabIndex = 3;
+            this.lbl_dniPatient.Text = "Ingrese su DNI:";
+            // 
+            // lbl_specialField
+            // 
+            this.lbl_specialField.AutoSize = true;
+            this.lbl_specialField.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lbl_specialField.Location = new System.Drawing.Point(84, 168);
+            this.lbl_specialField.Name = "lbl_specialField";
+            this.lbl_specialField.Size = new System.Drawing.Size(174, 17);
+            this.lbl_specialField.TabIndex = 4;
+            this.lbl_specialField.Text = "Seleccione la especialidad:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(84, 237);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(86, 17);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Elija la fecha:";
+            // 
+            // pnl_picture
+            // 
+            this.pnl_picture.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.pnl_picture.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pnl_picture.BackgroundImage")));
+            this.pnl_picture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pnl_picture.Location = new System.Drawing.Point(450, 0);
+            this.pnl_picture.Name = "pnl_picture";
+            this.pnl_picture.Size = new System.Drawing.Size(515, 508);
+            this.pnl_picture.TabIndex = 6;
+            // 
+            // lbl_title
+            // 
+            this.lbl_title.AutoSize = true;
+            this.lbl_title.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lbl_title.Location = new System.Drawing.Point(31, 48);
+            this.lbl_title.Name = "lbl_title";
+            this.lbl_title.Size = new System.Drawing.Size(369, 22);
+            this.lbl_title.TabIndex = 7;
+            this.lbl_title.Text = "Solicite su turno completando los datos.";
+            // 
+            // btn_request
+            // 
+            this.btn_request.BackColor = System.Drawing.Color.MidnightBlue;
+            this.btn_request.FlatAppearance.BorderSize = 0;
+            this.btn_request.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_request.ForeColor = System.Drawing.Color.White;
+            this.btn_request.Location = new System.Drawing.Point(84, 444);
+            this.btn_request.Name = "btn_request";
+            this.btn_request.Size = new System.Drawing.Size(248, 33);
+            this.btn_request.TabIndex = 8;
+            this.btn_request.Text = "Solicitar turno";
+            this.btn_request.UseVisualStyleBackColor = false;
             // 
             // AppointmentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(964, 507);
+            this.Controls.Add(this.btn_request);
+            this.Controls.Add(this.lbl_title);
+            this.Controls.Add(this.pnl_picture);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lbl_specialField);
+            this.Controls.Add(this.lbl_dniPatient);
+            this.Controls.Add(this.mtc_appntDate);
+            this.Controls.Add(this.cbx_specialField);
+            this.Controls.Add(this.txb_dniPatient);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "AppointmentForm";
-            this.Text = "Turnos";
+            this.Text = "Solicitar Turno";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
+
+        private TextBox txb_dniPatient;
+        private ComboBox cbx_specialField;
+        private MonthCalendar mtc_appntDate;
+        private Label lbl_dniPatient;
+        private Label lbl_specialField;
+        private Label label1;
+        private Panel pnl_picture;
+        private Label lbl_title;
+        private Button btn_request;
     }
 }

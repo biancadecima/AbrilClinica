@@ -1,4 +1,5 @@
-﻿using AbrilClinica.Entities.Models;
+﻿using Abril_Clinica.Models;
+using AbrilClinica.Entities.Models;
 using AbrilClinica.Entities.Utilities;
 using System;
 using System.Collections.Generic;
@@ -14,11 +15,18 @@ namespace AbrilClinica.UI
 {
     public partial class AppointmentListForm : Form
     {
-        List<Appointment> appointments;
+        private List<Appointment> appointments;
+        private Patient _patient;
+
         public AppointmentListForm()
         {
             InitializeComponent();
             appointments= new List<Appointment>();
+        }
+
+        public AppointmentListForm(Patient patient)
+        {
+             _patient = patient;
         }
 
         private void AppointmentListForm_Load(object sender, EventArgs e)
