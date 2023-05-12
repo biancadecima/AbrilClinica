@@ -1,40 +1,52 @@
 using AbrilClinica.Entities.Utilities;
 using Abril_Clinica.Models;
 using AbrilClinica.Entities.Models;
+using Google.Type;
+using System.Collections.Generic;
+using System.IO;
+using AbrilClinica.Entities.Database;
 
 namespace AbrilClinic.Presentation
 {
     public partial class LogInForm : Form
     {
+        
+        
+        // modifico, agrego y elimino datos de esas listas
+        // termina el programa y reescribi esos archivos
         private List<User> _users;
+        private User _user;
+        private UserController _userController;
 
         public LogInForm()
         {
             InitializeComponent();
-
+            _userController = new UserController();
             _users = new List<User>();
+            _user = new User(); 
         }
 
         private void LogInForm_Load(object sender, EventArgs e)
         {
-            Harcoder.HarcodeUsers(_users);
+
+            _userController.CreateUsers();//Creo el Archivo y le cargo datos hardcodeados
+            _users = _userController.GetUsers();// Leo el Archivo y cargo en listas los datos del Archivo
         }
 
         private void btn_logIn_Click(object sender, EventArgs e)
         {
-            var user = new User();
-            if (Session.UserExits(tbx_username.Text, _users, out user) && Session.IsCorrectPassword(_users, tbx_username.Text, tbx_password.Text))
+            try
             {
-                if(user is not null)
+                if (Session.UserExits(tbx_username.Text, _users, out _user) && Session.IsCorrectPassword(_users, tbx_username.Text, tbx_password.Text))
                 {
-                    var principalMenu = new MenuForm(user);
+                    var principalMenu = new MenuForm(_user);
                     principalMenu.Show();
                     Hide();
                 }
             }
-            else
+            catch(Exception ex)
             {
-                MessageBox.Show("No se pudo acceder. Reintente.");
+                MessageBox.Show("No se pudo acceder. Reintente."); // no es lo mas optimo un message box
             }
         }
 

@@ -123,11 +123,11 @@
             // 
             this.pnl_verticalmenu.BackColor = System.Drawing.Color.SteelBlue;
             this.pnl_verticalmenu.Controls.Add(this.btn_logOut);
+            this.pnl_verticalmenu.Controls.Add(this.btn_appointment);
             this.pnl_verticalmenu.Controls.Add(this.btn_apptview);
             this.pnl_verticalmenu.Controls.Add(this.btn_doclistview);
             this.pnl_verticalmenu.Controls.Add(this.btn_patientmngmt);
             this.pnl_verticalmenu.Controls.Add(this.btn_apptmngmt);
-            this.pnl_verticalmenu.Controls.Add(this.btn_appointment);
             this.pnl_verticalmenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnl_verticalmenu.Location = new System.Drawing.Point(0, 35);
             this.pnl_verticalmenu.Name = "pnl_verticalmenu";
@@ -156,7 +156,7 @@
             this.btn_apptview.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_apptview.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_apptview.ForeColor = System.Drawing.Color.White;
-            this.btn_apptview.Location = new System.Drawing.Point(0, 127);
+            this.btn_apptview.Location = new System.Drawing.Point(0, 168);
             this.btn_apptview.Name = "btn_apptview";
             this.btn_apptview.Size = new System.Drawing.Size(217, 32);
             this.btn_apptview.TabIndex = 11;
@@ -171,12 +171,13 @@
             this.btn_doclistview.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_doclistview.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_doclistview.ForeColor = System.Drawing.Color.White;
-            this.btn_doclistview.Location = new System.Drawing.Point(0, 165);
+            this.btn_doclistview.Location = new System.Drawing.Point(0, 206);
             this.btn_doclistview.Name = "btn_doclistview";
             this.btn_doclistview.Size = new System.Drawing.Size(217, 32);
             this.btn_doclistview.TabIndex = 10;
             this.btn_doclistview.Text = "Ver Lista de Medicos";
             this.btn_doclistview.UseVisualStyleBackColor = true;
+            this.btn_doclistview.Click += new System.EventHandler(this.btn_doclistview_Click);
             // 
             // btn_patientmngmt
             // 
@@ -185,12 +186,13 @@
             this.btn_patientmngmt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_patientmngmt.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_patientmngmt.ForeColor = System.Drawing.Color.White;
-            this.btn_patientmngmt.Location = new System.Drawing.Point(0, 241);
+            this.btn_patientmngmt.Location = new System.Drawing.Point(3, 168);
             this.btn_patientmngmt.Name = "btn_patientmngmt";
             this.btn_patientmngmt.Size = new System.Drawing.Size(217, 32);
             this.btn_patientmngmt.TabIndex = 9;
             this.btn_patientmngmt.Text = "Gestionar Pacientes";
             this.btn_patientmngmt.UseVisualStyleBackColor = true;
+            this.btn_patientmngmt.Click += new System.EventHandler(this.btn_patientmngmt_Click);
             // 
             // btn_apptmngmt
             // 
@@ -199,12 +201,13 @@
             this.btn_apptmngmt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_apptmngmt.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_apptmngmt.ForeColor = System.Drawing.Color.White;
-            this.btn_apptmngmt.Location = new System.Drawing.Point(0, 203);
+            this.btn_apptmngmt.Location = new System.Drawing.Point(0, 130);
             this.btn_apptmngmt.Name = "btn_apptmngmt";
             this.btn_apptmngmt.Size = new System.Drawing.Size(217, 32);
             this.btn_apptmngmt.TabIndex = 8;
             this.btn_apptmngmt.Text = "Gestionar Turnos";
             this.btn_apptmngmt.UseVisualStyleBackColor = true;
+            this.btn_apptmngmt.Click += new System.EventHandler(this.btn_apptmngmt_Click);
             // 
             // btn_appointment
             // 
@@ -213,7 +216,7 @@
             this.btn_appointment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_appointment.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_appointment.ForeColor = System.Drawing.Color.White;
-            this.btn_appointment.Location = new System.Drawing.Point(0, 89);
+            this.btn_appointment.Location = new System.Drawing.Point(0, 130);
             this.btn_appointment.Name = "btn_appointment";
             this.btn_appointment.Size = new System.Drawing.Size(217, 32);
             this.btn_appointment.TabIndex = 0;

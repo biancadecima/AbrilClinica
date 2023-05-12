@@ -41,13 +41,13 @@ namespace AbrilClinic.Presentation
                 btn_apptmngmt.Visible = false;
                 btn_patientmngmt.Visible = false;
             }
-          
         }
 
         private void btn_appointment_Click(object sender, EventArgs e)
         {
-            Patient patient = (Patient)_user; // esta bien esto?
-            var childAppointmentForm = new AppointmentForm(patient);
+            //Patient patient = (Patient)_user; // esta bien esto?
+
+            var childAppointmentForm = new AppointmentForm(_user);
             childAppointmentForm.TopLevel= false;
          
             childAppointmentForm.MdiParent = this;
@@ -77,13 +77,29 @@ namespace AbrilClinic.Presentation
             childAppointmentListForm.Show();
         }
 
-        //private void sacarTurnoToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    var child = new AppointmentForm();
-        //    child.MdiParent = this;
-        //    child.WindowState = FormWindowState.Minimized;
-        //    child.Show();
-        //}
+        private void btn_doclistview_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_apptmngmt_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_patientmngmt_Click(object sender, EventArgs e)
+        {
+            
+            var childPatientADMForm = new PatientADMForm();
+            childPatientADMForm.MdiParent = this;
+            childPatientADMForm.WindowState= FormWindowState.Maximized;
+            childPatientADMForm.Dock = DockStyle.Fill;
+            pnl_container.Controls.Add(childPatientADMForm);
+            pnl_container.Tag = childPatientADMForm;
+            childPatientADMForm.Activate();
+            childPatientADMForm.BringToFront();
+            childPatientADMForm.Show();
+        }
 
         private void btn_close_Click(object sender, EventArgs e)
         {
@@ -110,6 +126,6 @@ namespace AbrilClinic.Presentation
             this.WindowState = FormWindowState.Minimized;
         }
 
-       
+    
     }
 }

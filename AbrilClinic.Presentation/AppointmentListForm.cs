@@ -15,13 +15,13 @@ namespace AbrilClinica.UI
 {
     public partial class AppointmentListForm : Form
     {
-        private List<Appointment> appointments;
+        private List<Appointment> _appointments;
         private Patient _patient;
 
         public AppointmentListForm()
         {
             InitializeComponent();
-            appointments= new List<Appointment>();
+            _appointments = new List<Appointment>();
         }
 
         public AppointmentListForm(Patient patient)
@@ -31,8 +31,8 @@ namespace AbrilClinica.UI
 
         private void AppointmentListForm_Load(object sender, EventArgs e)
         {
-            Harcoder.HardcodeAppointment(appointments);
-            ActualizeDataGrid(appointments); 
+            _appointments = Harcoder.HardcodeAppointment();
+            ActualizeDataGrid(_appointments); 
         }
 
         public void ActualizeDataGrid(List<Appointment> appointments)
@@ -40,6 +40,8 @@ namespace AbrilClinica.UI
             dgv_appointment.DataSource = null;
             dgv_appointment.DataSource = appointments;// establece que una coleccion sea su base de datos
         }
+
+
 
         //public void btnAdd_Click(object sender, EventArgs e)
         //{

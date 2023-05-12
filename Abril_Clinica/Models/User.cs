@@ -1,13 +1,15 @@
-﻿using AbrilClinica.Entities.DataManagment;
+﻿//using AbrilClinica.Entities.DataManagment;
+using AbrilClinica.Entities.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Abril_Clinica.Models
 {
-    public class User
+    public class User : Parser
     {
         private string _name;
         private string _surname;
@@ -19,6 +21,8 @@ namespace Abril_Clinica.Models
         public string Surname { get => _surname; set => _surname = value; }
         public string Username { get => _username; set => _username = value; }
         public string Password { get => _password; set => _password = value; }
+
+        [Browsable(false)]
         public bool IsAdmin { get => _isAdmin;}
 
         protected User(string name, string surname, string username, string password, bool isAdmin)
@@ -34,14 +38,32 @@ namespace Abril_Clinica.Models
         {
         }
 
-        public virtual string Show() // polimorfear :)
+        public static explicit operator User(string line)
         {
-           StringBuilder sb = new StringBuilder();
-            sb.AppendLine($"Nombre: {this.Name}");
-            sb.AppendLine($"Apellido: {this.Surname}");
-            sb.AppendLine($"Nombre de Usuario: {this.Username}");
-            sb.AppendLine($"Contraseña: {this.Password}");
+            string separator = ",";
+            string[] row = line.Split(separator);
+            
+            string name = row[0];
+            string surname = row[1];
+            string username = row[2];
+            string password = row[3];
+            bool isAdmin = Convert.ToBoolean(row[4]);
+            User user = new User(name, surname, username, password, isAdmin);
+            
+            return user;
+        }
+
+        public override string ObjectToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append($"{Name},{Surname},{Username},{Password},{IsAdmin}");
             return sb.ToString();
+        }
+
+        public override Parser Parse(string line)
+        {
+            User user = (User)line;
+            return user;
         }
 
     }
