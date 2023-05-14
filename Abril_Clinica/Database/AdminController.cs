@@ -7,29 +7,27 @@ using System.Threading.Tasks;
 
 namespace AbrilClinica.Entities.Database
 {
-    public class UserController
+    public class AdminController
     {
         private DataBase _database;
-        public UserController() 
+        public AdminController()
         {
             _database = new DataBase();
         }
 
-        public void CreateUsers()
+        public void CreateAdmins()
         {
-            _database.CreateUserArchive();
+            _database.CreateAdminArchive();
         }
 
-        public List<User> GetUsers()
+        public List<Admin> GetAdmins()
         {
-            return _database.GetUsers();
+            return _database.GetAdmins();
         }
 
-        public void SetUsers(List<User> users)
+        public Admin GetAdminByUsername(string username)
         {
-            _database.SetUsers(users);
+            return _database.GetAdminByUsername(username);
         }
-
-
     }
 }

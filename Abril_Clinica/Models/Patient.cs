@@ -12,6 +12,7 @@ namespace Abril_Clinica.Models
     {
         private int _dni;
 
+        
         public Patient(string name, string surname, string username, string password, bool isAdmin, int dni) : base(name, surname, username, password, false)
         {
             _dni = dni;
@@ -37,7 +38,7 @@ namespace Abril_Clinica.Models
         public override string ObjectToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append(base.ToString());
+            sb.Append(base.ObjectToString());
             sb.Append($",{Dni}");
             return sb.ToString();
         }

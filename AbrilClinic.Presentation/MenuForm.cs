@@ -1,4 +1,5 @@
 ﻿using Abril_Clinica.Models;
+using AbrilClinica.Entities.Database;
 using AbrilClinica.Entities.Models;
 using AbrilClinica.UI;
 using System;
@@ -16,15 +17,21 @@ namespace AbrilClinic.Presentation
     public partial class MenuForm : Form
     {
         private User _user;
+        private Patient _patient;
+        private Admin _admin;
+        private PatientController _patientController;
+        private AdminController _adminController;
         private MenuForm()
         {
             InitializeComponent();
-            // se inicializa todo en el contrustror, inclusive un objeto que queramos usar 
+            _adminController= new AdminController();
+            _patientController= new PatientController();
         }
 
         public MenuForm(User user):this()
         {
             _user = user;
+
         }
 
         private void MenuForm_Load(object sender, EventArgs e)
@@ -32,22 +39,27 @@ namespace AbrilClinic.Presentation
             IsMdiContainer = true;
             if (Session.IsAnAdminSession(_user))
             {
+                // es admin
                 btn_appointment.Visible = false;
                 btn_apptview.Visible = false;
                 btn_doclistview.Visible = false;
+                _adminController.CreateAdmins();
+                _admin = _adminController.GetAdminByUsername(_user.Username);
             }
             else
             {
+                //es paciente
                 btn_apptmngmt.Visible = false;
                 btn_patientmngmt.Visible = false;
+                _patientController.CreatePatients();
+                _patient = _patientController.GetPatientByUsername(_user.Username);
             }
+
         }
 
         private void btn_appointment_Click(object sender, EventArgs e)
         {
-            //Patient patient = (Patient)_user; // esta bien esto?
-
-            var childAppointmentForm = new AppointmentForm(_user);
+            var childAppointmentForm = new AppointmentForm(_patient);
             childAppointmentForm.TopLevel= false;
          
             childAppointmentForm.MdiParent = this;
@@ -63,8 +75,7 @@ namespace AbrilClinic.Presentation
 
         private void btn_apptview_Click(object sender, EventArgs e)
         {
-            Patient patient = (Patient)_user; // esta bien esto?
-            var childAppointmentListForm = new AppointmentListForm(patient);
+            var childAppointmentListForm = new AppointmentListForm(_patient);
             childAppointmentListForm.MdiParent = this;
             childAppointmentListForm.WindowState = FormWindowState.Maximized;
 
@@ -79,17 +90,32 @@ namespace AbrilClinic.Presentation
 
         private void btn_doclistview_Click(object sender, EventArgs e)
         {
-
+            var childDoctorListForm = new DoctorListForm();
+            childDoctorListForm.MdiParent = this;
+            childDoctorListForm.WindowState = FormWindowState.Maximized;
+            childDoctorListForm.Dock = DockStyle.Fill;
+            pnl_container.Controls.Add(childDoctorListForm);
+            pnl_container.Tag = childDoctorListForm;
+            childDoctorListForm.Activate();
+            childDoctorListForm.BringToFront();
+            childDoctorListForm.Show();
         }
 
         private void btn_apptmngmt_Click(object sender, EventArgs e)
         {
-
+            var childAppointmentDMForm = new AppointmentDMForm();
+            childAppointmentDMForm.MdiParent = this;
+            childAppointmentDMForm.WindowState = FormWindowState.Maximized;
+            childAppointmentDMForm.Dock = DockStyle.Fill;
+            pnl_container.Controls.Add(childAppointmentDMForm);
+            pnl_container.Tag = childAppointmentDMForm;
+            childAppointmentDMForm.Activate();
+            childAppointmentDMForm.BringToFront();
+            childAppointmentDMForm.Show();
         }
 
         private void btn_patientmngmt_Click(object sender, EventArgs e)
         {
-            
             var childPatientADMForm = new PatientADMForm();
             childPatientADMForm.MdiParent = this;
             childPatientADMForm.WindowState= FormWindowState.Maximized;

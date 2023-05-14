@@ -25,21 +25,14 @@ namespace AbrilClinica.Entities.Models
                 {
                     user = u;
                     return true;
-
                 }
             }
             return false;
         }
 
-        public static bool IsCorrectPassword(List<User> users, string username, string password)
+        public static bool IsCorrectPassword(User user, string password)
         {
-            foreach (var u in users)
-            {
-                if (u.Username == username)
-                {
-                    if (u.Password == password) return true;
-                }
-            }
+             if (user.Password == password) return true;
             return false;
         }
 

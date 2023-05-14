@@ -5,18 +5,17 @@ using Google.Type;
 using System.Collections.Generic;
 using System.IO;
 using AbrilClinica.Entities.Database;
+using Microsoft.VisualBasic.ApplicationServices;
+using System.Linq.Expressions;
+using User = Abril_Clinica.Models.User;
 
 namespace AbrilClinic.Presentation
 {
     public partial class LogInForm : Form
     {
-        
-        
-        // modifico, agrego y elimino datos de esas listas
-        // termina el programa y reescribi esos archivos
+        private UserController _userController;
         private List<User> _users;
         private User _user;
-        private UserController _userController;
 
         public LogInForm()
         {
@@ -27,21 +26,20 @@ namespace AbrilClinic.Presentation
         }
 
         private void LogInForm_Load(object sender, EventArgs e)
-        {
-
-            _userController.CreateUsers();//Creo el Archivo y le cargo datos hardcodeados
-            _users = _userController.GetUsers();// Leo el Archivo y cargo en listas los datos del Archivo
+        {    
+            _userController.CreateUsers();
+            _users = _userController.GetUsers();
         }
 
         private void btn_logIn_Click(object sender, EventArgs e)
         {
             try
             {
-                if (Session.UserExits(tbx_username.Text, _users, out _user) && Session.IsCorrectPassword(_users, tbx_username.Text, tbx_password.Text))
+                if (Session.UserExits(tbx_username.Text, _users, out _user) && Session.IsCorrectPassword(_user, tbx_password.Text))
                 {
                     var principalMenu = new MenuForm(_user);
                     principalMenu.Show();
-                    Hide();
+                    Hide(); 
                 }
             }
             catch(Exception ex)

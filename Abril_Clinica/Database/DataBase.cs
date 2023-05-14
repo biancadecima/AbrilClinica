@@ -24,24 +24,48 @@ namespace AbrilClinica.Entities.Database
 
         public void CreateUserArchive()
         {
-            //if (!File.Exists(_userPath))
-            //{
-            using (StreamWriter sw = new StreamWriter(_userPath))
+            if (!File.Exists(_userPath))
             {
+                using (StreamWriter sw = new StreamWriter(_userPath))
+                {
+                    sw.WriteLine("Bianca,Decima,bdecima,coco123,false,45686325");
+                    sw.WriteLine("Marcos,Dente,holamarcos,holahola,false,54686325");
+                    sw.WriteLine("Florencia,Peña,fpenia,fifus,false,98586325");
+                    sw.WriteLine("Simon,Dice,sidimonce,98pepe,false,78654235");
+
+                    sw.WriteLine("John,Melano,jmela,mela1,true,501,Medicina Familiar");
+                    sw.WriteLine("Carlos,Horia,horiac,horica00,true,406,Ginecologia");
+                    sw.WriteLine("Sofia,Munro,smunro,rofia77, true, 407,Nutricion");
+                    sw.WriteLine("Sergio,Hernandez,shernan,nandez88,true,408,Kinesiologia");
+                    sw.WriteLine("Mauro,Casorio,msorio,cauro22,true,406,Obstetricia");
+                }
+            }
+           
+
+        }
+        public void CreatePatientArchive()
+        {
+            if (!File.Exists(_patientPath))
+            {
+                using StreamWriter sw = new StreamWriter(_patientPath);
                 sw.WriteLine("Bianca,Decima,bdecima,coco123,false,45686325");
                 sw.WriteLine("Marcos,Dente,holamarcos,holahola,false,54686325");
                 sw.WriteLine("Florencia,Peña,fpenia,fifus,false,98586325");
                 sw.WriteLine("Simon,Dice,sidimonce,98pepe,false,78654235");
+            }
+        }
 
+        public void CreateAdminArchive()
+        {
+            if (!File.Exists(_adminPath))
+            {
+                using StreamWriter sw = new StreamWriter(_adminPath);
                 sw.WriteLine("John,Melano,jmela,mela1,true,501,Medicina Familiar");
                 sw.WriteLine("Carlos,Horia,horiac,horica00,true,406,Ginecologia");
                 sw.WriteLine("Sofia,Munro,smunro,rofia77, true, 407,Nutricion");
                 sw.WriteLine("Sergio,Hernandez,shernan,nandez88,true,408,Kinesiologia");
                 sw.WriteLine("Mauro,Casorio,msorio,cauro22,true,406,Obstetricia");
             }
-                
-                //sw.Close();
-            //}
         }
 
         public void CreateAppointmentArchive()
@@ -84,6 +108,72 @@ namespace AbrilClinica.Entities.Database
             return appointmentList;
         }
 
+        public List<Patient> GetPatients()
+        {
+            string text = Read(_patientPath);
+            string[] line = text.Split('\n');
+            List<string> patientStringList = new List<string>();
+            List<Patient> patientList = new List<Patient>();
+
+            for (int i = 0; i < line.Length - 1; i++)
+            {
+                patientStringList.Add(line[i]);
+            }
+            foreach (string row in patientStringList)
+            {
+                patientList.Add((Patient)row);
+            }
+
+            return patientList;
+        }
+
+        public Patient GetPatientByUsername(string username)
+        {
+            List<Patient> patientList = new List<Patient>();
+            patientList = GetPatients();
+            foreach(Patient patient in patientList)
+            {
+                if(patient.Username == username)
+                {
+                    return patient;
+                }
+            }
+            throw new ArgumentException($"Nombre usuario no existente");
+        }
+
+        public List<Admin> GetAdmins()
+        {
+            string text = Read(_adminPath);
+            string[] line = text.Split('\n');
+            List<string> adminStringList = new List<string>();
+            List<Admin> adminList = new List<Admin>();
+
+            for (int i = 0; i < line.Length - 1; i++)
+            {
+                adminStringList.Add(line[i]);
+            }
+            foreach (string row in adminStringList)
+            {
+                adminList.Add((Admin)row);
+            }
+
+            return adminList;
+        }
+
+        public Admin GetAdminByUsername(string username)
+        {
+            List<Admin> adminList = new List<Admin>();
+            adminList = GetAdmins();
+            foreach (Admin admin in adminList)
+            {
+                if (admin.Username == username)
+                {
+                    return admin;
+                }
+            }
+            throw new ArgumentException($"Nombre usuario no existente");
+        }
+
         public List<User> GetUsers()
         {
             string text = Read(_userPath);
@@ -106,7 +196,7 @@ namespace AbrilClinica.Entities.Database
 
         public void SetAppointments(List<Appointment> appointments)
         {
-            StreamWriter sw = new StreamWriter(_appointmentPath);
+            using StreamWriter sw = new StreamWriter(_appointmentPath);
             foreach (var item in appointments)
             {
                 sw.WriteLine(item.ObjectToString());
@@ -115,15 +205,31 @@ namespace AbrilClinica.Entities.Database
             sw.Close();
         }
 
+        public void SetPatients(List<Patient> patients)
+        {
+            using StreamWriter sw = new StreamWriter(_patientPath);
+            foreach (var item in patients)
+            {
+                sw.WriteLine(item.ObjectToString());
+            }
+        }
+
+        public void SetAdmins(List<Admin> admins)
+        {
+            using StreamWriter sw = new StreamWriter(_adminPath);
+            foreach (var item in admins)
+            {
+                sw.WriteLine(item.ObjectToString());
+            }
+        }
+
         public void SetUsers(List<User> users)
         {
-            StreamWriter sw = new StreamWriter(_userPath);
+            using StreamWriter sw = new StreamWriter(_userPath, true);
             foreach (var item in users)
             {
                 sw.WriteLine(item.ObjectToString());
             }
-
-            sw.Close();
         }
     }
 }

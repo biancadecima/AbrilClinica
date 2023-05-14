@@ -47,7 +47,7 @@ namespace Abril_Clinica.Models
         public override string ObjectToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append(base.ToString());
+            sb.Append(base.ObjectToString());
             sb.Append($",{IdDoctor},{SpecialField}");
             return sb.ToString();
         }

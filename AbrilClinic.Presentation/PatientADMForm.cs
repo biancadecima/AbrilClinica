@@ -17,12 +17,15 @@ namespace AbrilClinica.UI
     public partial class PatientADMForm : Form
     {
         private User _user;
+        private PatientController _patientController;
         private Patient _patient;
         private List<Patient> _patients;
-        private int index = -1;
+        private int index;
         public PatientADMForm()
         {
             InitializeComponent();
+            _patientController = new PatientController();
+            _patients = new List<Patient>(); 
         }
 
         public PatientADMForm(User user) : this()
@@ -31,7 +34,8 @@ namespace AbrilClinica.UI
         }
         private void PatientADMForm_Load(object sender, EventArgs e)
         {
-            _patients = Harcoder.HardcodePatients();
+            _patientController.CreatePatients();
+            _patients = _patientController.GetPatients();
             ActualizeDataGrid(_patients);
         }
         public void ActualizeDataGrid(List<Patient> patients)
@@ -54,13 +58,38 @@ namespace AbrilClinica.UI
             if(Validator.IsString(txb_name.Text) && Validator.IsString(txb_surname.Text) && Validator.IsString(txb_username.Text) && Validator.IsPassword(txb_password.Text) && Validator.IsDni(txb_dni.Text, out int patientDni))
             {
                 _patient = new Patient(txb_name.Text, txb_surname.Text, txb_username.Text, txb_password.Text, true, patientDni);
-
+                _patients.Add(_patient);
                 ActualizeDataGrid(_patients);
+                _patientController.SetPatients(_patients);
             }
             else
             {
                 MessageBox.Show("No se pudo agregar al paciente. Reintente.");
             }
+            
+        }
+
+        private void dgv_patients_DoubleClick(object sender, EventArgs e)
+        {
+            try 
+            {
+                btn_add.Enabled = false;
+                btn_modify.Enabled = true;
+                btn_delete.Enabled = true;
+
+                DataGridViewRow P = dgv_patients.SelectedRows[0];
+                int s = dgv_patients.Rows.IndexOf(P);
+                index = s;
+                Patient selectedPatient = _patients[s];
+                if (selectedPatient != null)
+                {
+                    txb_name.Text = selectedPatient.Name;
+                    txb_surname.Text = selectedPatient.Surname;
+                    txb_username.Text = selectedPatient.Username;
+                    txb_password.Text = selectedPatient.Password;
+                    txb_dni.Text = selectedPatient.Dni.ToString();
+                }
+            } catch { MessageBox.Show("Presione sobre la flecha en la columna izquierda para seleccionar un paciente"); }
             
         }
 
@@ -70,40 +99,30 @@ namespace AbrilClinica.UI
             btn_delete.Enabled = true;
 
             // tendria que validar?
-            Patient modifiedPatient = new Patient(txb_name.Text, txb_surname.Text, txb_username.Text, txb_password.Text, true, int.Parse(txb_dni.Text));
-            ActualizeDataGrid(_patients);
-
-        }
-
-        private void dgv_patients_DoubleClick(object sender, EventArgs e)
-        {
-            btn_add.Enabled = false;
-            btn_modify.Enabled = true;
-            btn_delete.Enabled = true;
-
-            DataGridViewRow P = dgv_patients.SelectedRows[0];
-            int s = dgv_patients.Rows.IndexOf(P);
-            index= s;
-            Patient selectedPatient = _patients[s]; 
-            if (selectedPatient != null)
+            if (Validator.IsString(txb_name.Text) && Validator.IsString(txb_surname.Text) && Validator.IsString(txb_username.Text) && Validator.IsPassword(txb_password.Text) && Validator.IsDni(txb_dni.Text, out int patientDni))
             {
-                txb_name.Text = selectedPatient.Name;
-                txb_surname.Text = selectedPatient.Surname;
-                txb_username.Text = selectedPatient.Username;
-                txb_password.Text = selectedPatient.Password;
-                txb_dni.Text = selectedPatient.Dni.ToString(); 
+                //_patientController.GetPatientByUsername();
+                Patient modifiedPatient = new Patient(txb_name.Text, txb_surname.Text, txb_username.Text, txb_password.Text, true, int.Parse(txb_dni.Text));
+                _patients[index] = modifiedPatient;
+                index = -1;
+                ActualizeDataGrid(_patients);
+                _patientController.SetPatients(_patients);
+                DeleteData();
             }
-                         
-              
+                
+
         }
 
         private void btn_delete_Click(object sender, EventArgs e)
         {
-            DialogResult option = MessageBox.Show("Desea eliminar el paciente?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult option = MessageBox.Show("¿Desea eliminar el paciente?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (option == DialogResult.Yes)
             {
-                //_patients.RemoveAt();
-
+                _patients.RemoveAt(index);
+                index = -1;
+                ActualizeDataGrid(_patients);
+                _patientController.SetPatients(_patients);
+                DeleteData();
             }
         }
 
