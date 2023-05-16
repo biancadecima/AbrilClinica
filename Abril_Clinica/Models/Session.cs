@@ -16,7 +16,7 @@ namespace AbrilClinica.Entities.Models
             return user.IsAdmin == true;
         }
 
-        public static bool UserExits(string username, List<User> users, out User user)
+        public static bool UserExists(string username, List<User> users, out User user)
         {
             user = null!;
             foreach(var u in users)

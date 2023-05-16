@@ -16,22 +16,22 @@ namespace AbrilClinica.UI
 {
     public partial class PatientADMForm : Form
     {
-        private User _user;
         private PatientController _patientController;
         private Patient _patient;
         private List<Patient> _patients;
+        private UserController _userController;
+        private User _user;
+        private List<User> _users;
         private int index;
         public PatientADMForm()
         {
             InitializeComponent();
             _patientController = new PatientController();
+            _userController = new UserController();
             _patients = new List<Patient>(); 
+            _users = new List<User>();
         }
-
-        public PatientADMForm(User user) : this()
-        {
-            _user = user;
-        }
+        
         private void PatientADMForm_Load(object sender, EventArgs e)
         {
             _patientController.CreatePatients();
@@ -41,7 +41,7 @@ namespace AbrilClinica.UI
         public void ActualizeDataGrid(List<Patient> patients)
         {
             dgv_patients.DataSource = null;
-            dgv_patients.DataSource = _patients;// establece que una coleccion sea su base de datos
+            dgv_patients.DataSource = patients;
         }
 
         public void DeleteData()
@@ -61,12 +61,12 @@ namespace AbrilClinica.UI
                 _patients.Add(_patient);
                 ActualizeDataGrid(_patients);
                 _patientController.SetPatients(_patients);
+                _userController.SetUsers(_patients);
             }
             else
             {
                 MessageBox.Show("No se pudo agregar al paciente. Reintente.");
             }
-            
         }
 
         private void dgv_patients_DoubleClick(object sender, EventArgs e)
@@ -98,19 +98,16 @@ namespace AbrilClinica.UI
             btn_add.Enabled = false;
             btn_delete.Enabled = true;
 
-            // tendria que validar?
             if (Validator.IsString(txb_name.Text) && Validator.IsString(txb_surname.Text) && Validator.IsString(txb_username.Text) && Validator.IsPassword(txb_password.Text) && Validator.IsDni(txb_dni.Text, out int patientDni))
             {
-                //_patientController.GetPatientByUsername();
                 Patient modifiedPatient = new Patient(txb_name.Text, txb_surname.Text, txb_username.Text, txb_password.Text, true, int.Parse(txb_dni.Text));
                 _patients[index] = modifiedPatient;
                 index = -1;
                 ActualizeDataGrid(_patients);
                 _patientController.SetPatients(_patients);
+                _userController.SetUsers(_patients);
                 DeleteData();
             }
-                
-
         }
 
         private void btn_delete_Click(object sender, EventArgs e)
@@ -122,10 +119,9 @@ namespace AbrilClinica.UI
                 index = -1;
                 ActualizeDataGrid(_patients);
                 _patientController.SetPatients(_patients);
+                _userController.SetUsers(_patients);
                 DeleteData();
             }
-        }
-
-       
+        }      
     }
 }

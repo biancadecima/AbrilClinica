@@ -34,7 +34,12 @@ namespace AbrilClinica.Entities.Utilities
                 
         }
 
+        public static bool IsDniSameAsDniPatient(int dni, int dniPtient)
+        {
+            return dni == dniPtient;
+        }
 
+      
 
         //Int32.TryParse(txb_dniPatient.Text, out int tbx_dni) && cbx_specialField.GetItemText(cbx_specialField.SelectedItem
 

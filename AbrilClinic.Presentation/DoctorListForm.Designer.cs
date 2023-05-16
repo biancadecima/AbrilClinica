@@ -28,12 +28,53 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.dgv_doctors = new System.Windows.Forms.DataGridView();
+            this.lbl_title = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_doctors)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // dgv_doctors
+            // 
+            this.dgv_doctors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgv_doctors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_doctors.Location = new System.Drawing.Point(33, 175);
+            this.dgv_doctors.Name = "dgv_doctors";
+            this.dgv_doctors.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgv_doctors.RowHeadersVisible = false;
+            this.dgv_doctors.RowTemplate.Height = 25;
+            this.dgv_doctors.Size = new System.Drawing.Size(998, 369);
+            this.dgv_doctors.TabIndex = 1;
+            // 
+            // lbl_title
+            // 
+            this.lbl_title.AutoSize = true;
+            this.lbl_title.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lbl_title.Location = new System.Drawing.Point(33, 30);
+            this.lbl_title.Name = "lbl_title";
+            this.lbl_title.Size = new System.Drawing.Size(317, 22);
+            this.lbl_title.TabIndex = 2;
+            this.lbl_title.Text = "Médicos disponibles de Abril Clinic";
+            // 
+            // DoctorListForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1067, 576);
+            this.Controls.Add(this.lbl_title);
+            this.Controls.Add(this.dgv_doctors);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Name = "DoctorListForm";
             this.Text = "DoctorListForm";
+            this.Load += new System.EventHandler(this.DoctorListForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_doctors)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+
+        private DataGridView dgv_doctors;
+        private Label lbl_title;
     }
 }

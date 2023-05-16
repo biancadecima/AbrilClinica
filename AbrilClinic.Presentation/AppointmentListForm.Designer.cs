@@ -28,22 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgv_appointment = new System.Windows.Forms.DataGridView();
             this.lbl_title = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_appointment)).BeginInit();
+            this.btn_delete = new System.Windows.Forms.Button();
+            this.dgv_appointments = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_appointments)).BeginInit();
             this.SuspendLayout();
-            // 
-            // dgv_appointment
-            // 
-            this.dgv_appointment.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgv_appointment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_appointment.Location = new System.Drawing.Point(42, 125);
-            this.dgv_appointment.Name = "dgv_appointment";
-            this.dgv_appointment.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.dgv_appointment.RowHeadersVisible = false;
-            this.dgv_appointment.RowTemplate.Height = 25;
-            this.dgv_appointment.Size = new System.Drawing.Size(998, 437);
-            this.dgv_appointment.TabIndex = 0;
             // 
             // lbl_title
             // 
@@ -55,27 +44,54 @@
             this.lbl_title.TabIndex = 1;
             this.lbl_title.Text = "Mis turnos pendientes";
             // 
+            // btn_delete
+            // 
+            this.btn_delete.BackColor = System.Drawing.Color.MidnightBlue;
+            this.btn_delete.FlatAppearance.BorderSize = 0;
+            this.btn_delete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_delete.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btn_delete.ForeColor = System.Drawing.Color.White;
+            this.btn_delete.Location = new System.Drawing.Point(42, 115);
+            this.btn_delete.Name = "btn_delete";
+            this.btn_delete.Size = new System.Drawing.Size(189, 32);
+            this.btn_delete.TabIndex = 5;
+            this.btn_delete.Text = "Cancelar Turno";
+            this.btn_delete.UseVisualStyleBackColor = false;
+            this.btn_delete.Click += new System.EventHandler(this.btn_delete_Click);
+            // 
+            // dgv_appointments
+            // 
+            this.dgv_appointments.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgv_appointments.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgv_appointments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_appointments.Location = new System.Drawing.Point(42, 198);
+            this.dgv_appointments.Name = "dgv_appointments";
+            this.dgv_appointments.RowTemplate.Height = 25;
+            this.dgv_appointments.Size = new System.Drawing.Size(1000, 385);
+            this.dgv_appointments.TabIndex = 17;
+            // 
             // AppointmentListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1083, 615);
+            this.Controls.Add(this.dgv_appointments);
+            this.Controls.Add(this.btn_delete);
             this.Controls.Add(this.lbl_title);
-            this.Controls.Add(this.dgv_appointment);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "AppointmentListForm";
             this.Text = "Lista de Turnos";
             this.Load += new System.EventHandler(this.AppointmentListForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_appointment)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_appointments)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private DataGridView dgv_appointment;
         private Label lbl_title;
+        private Button btn_delete;
+        private DataGridView dgv_appointments;
     }
 }

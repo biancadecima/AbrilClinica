@@ -4,6 +4,7 @@
 //using System.Linq;
 
 using Abril_Clinica.Models;
+using System.ComponentModel;
 using System.Text;
 //using System.Threading.Tasks;
 
@@ -15,8 +16,9 @@ namespace AbrilClinica.Entities.Models
         private int _dniPatient;
         private string _specialField;
         private DateTime _date;
-       // private int _idDoctor;
+        // private int _idDoctor;
 
+        [Browsable(false)]
         public int Id { get => _id;}
         public int DniPatient { get => _dniPatient;}
         public string SpecialField { get => _specialField; set => _specialField = value; }
@@ -59,6 +61,18 @@ namespace AbrilClinica.Entities.Models
             return appointment;
         }
 
-
+        public static int NewIdAppointment(List<Appointment> appointments)
+        {
+            Random idGenerator = new Random();
+            int id = idGenerator.Next(1, 500);
+            foreach(Appointment appointment in appointments)
+            {
+                if(appointment.Id == id)
+                {
+                    id = NewIdAppointment(appointments);
+                } 
+            }
+            return id;
+        }
     }
 }

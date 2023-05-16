@@ -75,7 +75,7 @@ namespace AbrilClinica.Entities.Database
                 using StreamWriter sw = new StreamWriter(_appointmentPath);
 
                 sw.WriteLine("4005,98586325,Medicina Familiar,2023/7/7");
-                sw.WriteLine("(1,45686325,Ginecologia,2023/7/7");
+                sw.WriteLine("1,45686325,Ginecologia,2023/7/7");
                 sw.WriteLine("2,54686325,Nutricion,2023/12/8");
                 sw.WriteLine("4,78654235,Obstreticia,2023/12/4");
                 sw.WriteLine("3,98586325,Kinesiologia,2023/5/6");
@@ -106,6 +106,21 @@ namespace AbrilClinica.Entities.Database
             }
 
             return appointmentList;
+        }
+
+        public List<Appointment> GetAppointmentsByDniPatient(int dni)
+        {
+            List<Appointment> appointmentList = new List<Appointment>();
+            appointmentList = GetAppointments();
+            List<Appointment> appointmentsByDniList = new List<Appointment>();
+            foreach (Appointment appointment in appointmentList)
+            {
+                if (appointment.DniPatient == dni)
+                {
+                    appointmentsByDniList.Add(appointment);
+                }
+            }
+            return appointmentsByDniList;
         }
 
         public List<Patient> GetPatients()
@@ -223,12 +238,25 @@ namespace AbrilClinica.Entities.Database
             }
         }
 
-        public void SetUsers(List<User> users)
+        public void SetUsers(List<Patient> patients)
         {
-            using StreamWriter sw = new StreamWriter(_userPath, true);
+            using StreamWriter sw = new StreamWriter(_userPath);
+            List<Admin> admins = new List<Admin>();
+            List<User> users = new List<User>();
+            admins = GetAdmins();
+            foreach(var item in admins)
+            {
+                User user = item;
+                users.Add(user);
+            }
+            foreach (var item in patients)
+            {
+                User user = item;
+                users.Add(user);
+            }
             foreach (var item in users)
             {
-                sw.WriteLine(item.ObjectToString());
+               sw.WriteLine(item.ObjectToString());
             }
         }
     }

@@ -35,7 +35,7 @@ namespace AbrilClinic.Presentation
         {
             try
             {
-                if (Session.UserExits(tbx_username.Text, _users, out _user) && Session.IsCorrectPassword(_user, tbx_password.Text))
+                if (Session.UserExists(tbx_username.Text, _users, out _user) && Session.IsCorrectPassword(_user, tbx_password.Text))
                 {
                     var principalMenu = new MenuForm(_user);
                     principalMenu.Show();

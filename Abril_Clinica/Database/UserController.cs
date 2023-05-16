@@ -25,9 +25,9 @@ namespace AbrilClinica.Entities.Database
             return _database.GetUsers();
         }
 
-        public void SetUsers(List<User> users)
+        public void SetUsers(List<Patient> patients)
         {
-            _database.SetUsers(users);
+            _database.SetUsers(patients);
         }
 
 

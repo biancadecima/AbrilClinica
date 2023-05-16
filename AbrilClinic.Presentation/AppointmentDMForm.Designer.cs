@@ -35,10 +35,10 @@
             this.lbl_name = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.dgv_patients = new System.Windows.Forms.DataGridView();
+            this.dgv_appointments = new System.Windows.Forms.DataGridView();
             this.dtp_appntDate = new System.Windows.Forms.DateTimePicker();
             this.cbx_specialField = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_patients)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_appointments)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl_title
@@ -64,6 +64,7 @@
             this.btn_modify.TabIndex = 4;
             this.btn_modify.Text = "Modificar";
             this.btn_modify.UseVisualStyleBackColor = false;
+            this.btn_modify.Click += new System.EventHandler(this.btn_modify_Click);
             // 
             // btn_delete
             // 
@@ -78,6 +79,7 @@
             this.btn_delete.TabIndex = 5;
             this.btn_delete.Text = "Eliminar";
             this.btn_delete.UseVisualStyleBackColor = false;
+            this.btn_delete.Click += new System.EventHandler(this.btn_delete_Click);
             // 
             // txb_dniPatient
             // 
@@ -116,16 +118,17 @@
             this.label2.TabIndex = 13;
             this.label2.Text = "Fecha:";
             // 
-            // dgv_patients
+            // dgv_appointments
             // 
-            this.dgv_patients.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgv_patients.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgv_patients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_patients.Location = new System.Drawing.Point(39, 240);
-            this.dgv_patients.Name = "dgv_patients";
-            this.dgv_patients.RowTemplate.Height = 25;
-            this.dgv_patients.Size = new System.Drawing.Size(986, 304);
-            this.dgv_patients.TabIndex = 16;
+            this.dgv_appointments.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgv_appointments.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgv_appointments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_appointments.Location = new System.Drawing.Point(39, 240);
+            this.dgv_appointments.Name = "dgv_appointments";
+            this.dgv_appointments.RowTemplate.Height = 25;
+            this.dgv_appointments.Size = new System.Drawing.Size(986, 304);
+            this.dgv_appointments.TabIndex = 16;
+            this.dgv_appointments.DoubleClick += new System.EventHandler(this.dgv_appointments_DoubleClick);
             // 
             // dtp_appntDate
             // 
@@ -136,6 +139,7 @@
             // 
             // cbx_specialField
             // 
+            this.cbx_specialField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbx_specialField.FormattingEnabled = true;
             this.cbx_specialField.Items.AddRange(new object[] {
             "Medicina Familiar",
@@ -156,7 +160,7 @@
             this.ClientSize = new System.Drawing.Size(1067, 576);
             this.Controls.Add(this.cbx_specialField);
             this.Controls.Add(this.dtp_appntDate);
-            this.Controls.Add(this.dgv_patients);
+            this.Controls.Add(this.dgv_appointments);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbl_name);
@@ -167,7 +171,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "AppointmentDMForm";
             this.Text = "AppointmentDMForm";
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_patients)).EndInit();
+            this.Load += new System.EventHandler(this.AppointmentDMForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_appointments)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -183,7 +188,7 @@
         private Label label1;
         private Label label2;
         private TextBox textBox2;
-        private DataGridView dgv_patients;
+        private DataGridView dgv_appointments;
         private DateTimePicker dtp_appntDate;
         private TextBox txb_dniPatient;
         private ComboBox cbx_specialField;

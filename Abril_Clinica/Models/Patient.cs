@@ -11,7 +11,6 @@ namespace Abril_Clinica.Models
     public class Patient : User
     {
         private int _dni;
-
         
         public Patient(string name, string surname, string username, string password, bool isAdmin, int dni) : base(name, surname, username, password, false)
         {

@@ -78,8 +78,6 @@ namespace AbrilClinic.Presentation
             var childAppointmentListForm = new AppointmentListForm(_patient);
             childAppointmentListForm.MdiParent = this;
             childAppointmentListForm.WindowState = FormWindowState.Maximized;
-
-            
             childAppointmentListForm.Dock = DockStyle.Fill;
             pnl_container.Controls.Add(childAppointmentListForm);
             pnl_container.Tag = childAppointmentListForm;
