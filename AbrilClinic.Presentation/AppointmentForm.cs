@@ -23,6 +23,9 @@ namespace AbrilClinica.UI
         private AppointmentController _appointmentController;
         private List<Appointment> _appointments;
 
+        /// <summary>
+        /// initialize the form, instantiate the appointments controller and create a list
+        /// </summary>
         public AppointmentForm()
         {
             InitializeComponent();
@@ -30,12 +33,21 @@ namespace AbrilClinica.UI
             _appointments = new List<Appointment>();
         }
 
+        /// <summary>
+        /// Receives the patient in charge of navigation
+        /// </summary>
+        /// <param name="patient"></param>
         public AppointmentForm(Patient patient): this()
         {
             _patient = patient;
 
         }
 
+        /// <summary>
+        /// Load the form, create appointment data if there is none, load the appointments in a list and sets the appointments date values
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AppointmentForm_Load(object sender, EventArgs e)
         {
             _appointmentController.CreateAppointments();
@@ -45,12 +57,17 @@ namespace AbrilClinica.UI
             
         }
 
+        /// <summary>
+        /// add a appointment to the list and set it in the appointment database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_request_Click(object sender, EventArgs e)
         {
             int id = Appointment.NewIdAppointment(_appointments);
-            if (Validator.IsDni(txb_dniPatient.Text, out int patientDni) && Validator.IsString(cbx_specialField.SelectedItem.ToString()) && Validator.IsDniSameAsDniPatient(_patient.Dni, patientDni))
+            if (Validator.IsDni(txb_dniPatient.Text, out int patientDni) && Validator.IsString(cbx_specialField.SelectedItem.ToString()!) && Validator.IsDniSameAsDniPatient(_patient.Dni, patientDni))
             {
-                Appointment appointment = new Appointment(id, patientDni, cbx_specialField.SelectedItem.ToString(), dtp_appntDate.Value);
+                Appointment appointment = new Appointment(id, patientDni, cbx_specialField.SelectedItem.ToString()!, dtp_appntDate.Value);
                 _appointments.Add(appointment);
                 _appointmentController.SetAppointments(_appointments);
                 MessageBox.Show("Turno agendado con éxito.");

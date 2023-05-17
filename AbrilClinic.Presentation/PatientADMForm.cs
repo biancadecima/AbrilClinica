@@ -2,6 +2,7 @@
 using AbrilClinica.Entities.Database;
 using AbrilClinica.Entities.Models;
 using AbrilClinica.Entities.Utilities;
+using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,30 +21,44 @@ namespace AbrilClinica.UI
         private Patient _patient;
         private List<Patient> _patients;
         private UserController _userController;
-        private User _user;
-        private List<User> _users;
         private int index;
+
+        /// <summary>
+        /// initializes the form and instantiates a patient list, the patient controller, and the user controller
+        /// </summary>
         public PatientADMForm()
         {
             InitializeComponent();
             _patientController = new PatientController();
             _userController = new UserController();
             _patients = new List<Patient>(); 
-            _users = new List<User>();
         }
-        
+
+        /// <summary>
+        /// Load the form, create patient data if there is none, load the patients in a list and update the datagrid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PatientADMForm_Load(object sender, EventArgs e)
         {
             _patientController.CreatePatients();
             _patients = _patientController.GetPatients();
             ActualizeDataGrid(_patients);
         }
+
+        /// <summary>
+        /// update the datagrid with the list of patients
+        /// </summary>
+        /// <param name="patients"></param>
         public void ActualizeDataGrid(List<Patient> patients)
         {
             dgv_patients.DataSource = null;
             dgv_patients.DataSource = patients;
         }
 
+        /// <summary>
+        /// removes the data loaded in the textboxes
+        /// </summary>
         public void DeleteData()
         {
             txb_name.Text = string.Empty;
@@ -53,6 +68,11 @@ namespace AbrilClinica.UI
             txb_dni.Text = string.Empty;
         }
 
+        /// <summary>
+        /// add a patient to the list and set it in the patient and user database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_add_Click(object sender, EventArgs e)
         {
             if(Validator.IsString(txb_name.Text) && Validator.IsString(txb_surname.Text) && Validator.IsString(txb_username.Text) && Validator.IsPassword(txb_password.Text) && Validator.IsDni(txb_dni.Text, out int patientDni))
@@ -69,6 +89,11 @@ namespace AbrilClinica.UI
             }
         }
 
+        /// <summary>
+        /// select a patient with double click event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dgv_patients_DoubleClick(object sender, EventArgs e)
         {
             try 
@@ -93,9 +118,14 @@ namespace AbrilClinica.UI
             
         }
 
+        /// <summary>
+        /// modifies a patient to the list and set it in the patient and user database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_modify_Click(object sender, EventArgs e)
         {
-            btn_add.Enabled = false;
+            btn_add.Enabled = true;
             btn_delete.Enabled = true;
 
             if (Validator.IsString(txb_name.Text) && Validator.IsString(txb_surname.Text) && Validator.IsString(txb_username.Text) && Validator.IsPassword(txb_password.Text) && Validator.IsDni(txb_dni.Text, out int patientDni))
@@ -110,8 +140,15 @@ namespace AbrilClinica.UI
             }
         }
 
+        /// <summary>
+        /// delete a patient to the list and set it in the patient and user database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_delete_Click(object sender, EventArgs e)
         {
+            btn_add.Enabled = true;
+            btn_delete.Enabled = true;
             DialogResult option = MessageBox.Show("¿Desea eliminar el paciente?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (option == DialogResult.Yes)
             {

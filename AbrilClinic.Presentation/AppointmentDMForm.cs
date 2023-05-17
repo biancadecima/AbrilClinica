@@ -20,6 +20,9 @@ namespace AbrilClinica.UI
         private List<Appointment> _appointments;
         private int index;
 
+        /// <summary>
+        /// initializes the form, instantiates the appointment controller and a list
+        /// </summary>
         public AppointmentDMForm()
         {
             InitializeComponent();
@@ -27,6 +30,11 @@ namespace AbrilClinica.UI
             _appointments= new List<Appointment>();
         }
 
+        /// <summary>
+        /// Load the form, create appointment data if there is none, load the appointments in a list and update the datagrid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AppointmentDMForm_Load(object sender, EventArgs e)
         {
             _appointmentController.CreateAppointments();
@@ -34,17 +42,30 @@ namespace AbrilClinica.UI
             ActualizeDataGrid(_appointments);
         }
 
+        /// <summary>
+        /// update the datagrid with the list of appointments
+        /// </summary>
+        /// <param name="appointments"></param>
         public void ActualizeDataGrid(List<Appointment> appointments)
         {
             dgv_appointments.DataSource = null;
             dgv_appointments.DataSource = appointments;
         }
 
+        /// <summary>
+        /// removes the data loaded in the textboxes
+        /// </summary>
         public void DeleteData()
         {
             txb_dniPatient.Text = string.Empty;
             cbx_specialField.Text = string.Empty;
         }
+
+        /// <summary>
+        /// select an appointment with double click event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dgv_appointments_DoubleClick(object sender, EventArgs e)
         {
             try
@@ -66,11 +87,16 @@ namespace AbrilClinica.UI
             }
         }
 
+        /// <summary>
+        /// modifies a appointment to the list and set it in the appointment and user database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_modify_Click(object sender, EventArgs e)
         {
-            if (Validator.IsDni(txb_dniPatient.Text, out int patientDni) && Validator.IsString(cbx_specialField.SelectedItem.ToString()))
+            if (Validator.IsDni(txb_dniPatient.Text, out int patientDni) && Validator.IsString(cbx_specialField.SelectedItem.ToString()!))
             {
-                Appointment modifiedAppointment = new Appointment(_appointments[index].Id, patientDni, cbx_specialField.SelectedItem.ToString(), dtp_appntDate.Value);
+                Appointment modifiedAppointment = new Appointment(_appointments[index].Id, patientDni, cbx_specialField.SelectedItem.ToString()!, dtp_appntDate.Value);
                 _appointments[index] = modifiedAppointment;
                 index = -1;
                 ActualizeDataGrid(_appointments);
@@ -79,6 +105,11 @@ namespace AbrilClinica.UI
             }
         }
 
+        /// <summary>
+        /// delete a appointment to the list and set it in the appointment and user database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_delete_Click(object sender, EventArgs e)
         {
             DialogResult option = MessageBox.Show("¿Desea eliminar el turno?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);

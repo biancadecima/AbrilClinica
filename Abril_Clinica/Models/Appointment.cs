@@ -1,12 +1,6 @@
-﻿//using AbrilClinica.Entities.Data;
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-
-using Abril_Clinica.Models;
+﻿using Abril_Clinica.Models;
 using System.ComponentModel;
 using System.Text;
-//using System.Threading.Tasks;
 
 namespace AbrilClinica.Entities.Models
 {
@@ -16,24 +10,32 @@ namespace AbrilClinica.Entities.Models
         private int _dniPatient;
         private string _specialField;
         private DateTime _date;
-        // private int _idDoctor;
 
         [Browsable(false)]
         public int Id { get => _id;}
         public int DniPatient { get => _dniPatient;}
         public string SpecialField { get => _specialField; set => _specialField = value; }
         public DateTime Date { get => _date; set => _date = value; }
-        //public int IdDoctor { get => _idDoctor; set => _idDoctor = value; }
 
-        public Appointment(int id, int dniPatient, string specialField, DateTime date /*, int idDoctor*/)
+        /// <summary>
+        /// initialize an appointment with data
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="dniPatient"></param>
+        /// <param name="specialField"></param>
+        /// <param name="date"></param>
+        public Appointment(int id, int dniPatient, string specialField, DateTime date)
         {
             _id = id;
             _dniPatient = dniPatient;
             _specialField = specialField;
             _date = date;
-           // _idDoctor= idDoctor;
         }
 
+        /// <summary>
+        /// convert a string to a appointment
+        /// </summary>
+        /// <param name="line"></param>
         public static explicit operator Appointment(string line)
         {
             string separator = ",";
@@ -48,6 +50,10 @@ namespace AbrilClinica.Entities.Models
             return appt;
         }
 
+        /// <summary>
+        /// convert appointment to string
+        /// </summary>
+        /// <returns></returns>
         public override string ObjectToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -55,12 +61,22 @@ namespace AbrilClinica.Entities.Models
             return sb.ToString();
         }
 
+        /// <summary>
+        /// parse into an appointment
+        /// </summary>
+        /// <param name="line"></param>
+        /// <returns></returns>
         public override Parser Parse(string line)
         {
             Appointment appointment = (Appointment)line;
             return appointment;
         }
 
+        /// <summary>
+        /// creates new unique id
+        /// </summary>
+        /// <param name="appointments"></param>
+        /// <returns></returns>
         public static int NewIdAppointment(List<Appointment> appointments)
         {
             Random idGenerator = new Random();

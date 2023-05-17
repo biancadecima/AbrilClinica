@@ -15,18 +15,30 @@ namespace Abril_Clinica.Models
         private int _idDoctor;
         private string _specialField;
 
+        public static bool isAdmin { get; }
+        public int IdDoctor { get => _idDoctor; set => _idDoctor = value; }
+        public string SpecialField { get => _specialField; set => _specialField = value; }
 
-
+        /// <summary>
+        /// initialize an admin with data
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="surname"></param>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="isAdmin"></param>
+        /// <param name="idDoctor"></param>
+        /// <param name="specialField"></param>
         public Admin(string name, string surname, string username, string password, bool isAdmin,int idDoctor, string specialField) : base(name, surname, username, password, true)
         {
             _idDoctor = idDoctor;
             _specialField = specialField;
         }
 
-        public static bool isAdmin { get; }
-        public int IdDoctor { get => _idDoctor; set => _idDoctor = value; }
-        public string SpecialField { get => _specialField; set => _specialField = value; }
-
+        /// <summary>
+        /// convert a string to a admin
+        /// </summary>
+        /// <param name="line"></param>
         public static explicit operator Admin(string line)
         {
             string separator = ",";
@@ -44,6 +56,10 @@ namespace Abril_Clinica.Models
             return admin;
         }
 
+        /// <summary>
+        /// convert admin to string
+        /// </summary>
+        /// <returns></returns>
         public override string ObjectToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -52,6 +68,11 @@ namespace Abril_Clinica.Models
             return sb.ToString();
         }
 
+        /// <summary>
+        /// parse into a admin
+        /// </summary>
+        /// <param name="line"></param>
+        /// <returns></returns>
         public override Parser Parse(string line)
         {
             Admin admin = (Admin)line;

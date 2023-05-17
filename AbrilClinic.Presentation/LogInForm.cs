@@ -8,6 +8,8 @@ using AbrilClinica.Entities.Database;
 using Microsoft.VisualBasic.ApplicationServices;
 using System.Linq.Expressions;
 using User = Abril_Clinica.Models.User;
+using System.ComponentModel.DataAnnotations;
+using System.Windows.Forms;
 
 namespace AbrilClinic.Presentation
 {
@@ -17,6 +19,9 @@ namespace AbrilClinic.Presentation
         private List<User> _users;
         private User _user;
 
+        /// <summary>
+        /// initializes the log in form, the user list, the user controller, and a user
+        /// </summary>
         public LogInForm()
         {
             InitializeComponent();
@@ -25,12 +30,22 @@ namespace AbrilClinic.Presentation
             _user = new User(); 
         }
 
+        /// <summary>
+        /// Creates users in case there aren't any and loads them into a list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LogInForm_Load(object sender, EventArgs e)
         {    
             _userController.CreateUsers();
             _users = _userController.GetUsers();
         }
 
+        /// <summary>
+        /// Validates the user input and if it is correct, instantiates the menu form 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_logIn_Click(object sender, EventArgs e)
         {
             try
@@ -42,22 +57,58 @@ namespace AbrilClinic.Presentation
                     Hide(); 
                 }
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 MessageBox.Show("No se pudo acceder. Reintente."); // no es lo mas optimo un message box
             }
         }
 
+        /// <summary>
+        /// Fill in the textboxes with data from a patient
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_autofill_patient_Click(object sender, EventArgs e)
         {
             tbx_username.Text = "bdecima";
             tbx_password.Text = "coco123";
         }
 
+        /// <summary>
+        /// Fill in the textboxes with data from an admin
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_autofill_admin_Click(object sender, EventArgs e)
         {
             tbx_username.Text = "msorio";
             tbx_password.Text = "cauro22";
         }
+
+        /// <summary>
+        /// Shows password
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pbx_show_Click(object sender, EventArgs e)
+        {
+            pbx_hide.BringToFront();
+            tbx_password.PasswordChar = '\0';
+        }
+
+        /// <summary>
+        /// Hides password
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pbx_hide_Click(object sender, EventArgs e)
+        {
+            pbx_show.BringToFront();
+            tbx_password.PasswordChar = '*';
+        }
+
+        
+
+        
     }
 }

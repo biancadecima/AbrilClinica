@@ -8,19 +8,17 @@ namespace AbrilClinica.Entities.Models
 {
     public abstract class Parser
     {
+        /// <summary>
+        /// convert object to string
+        /// </summary>
+        /// <returns></returns>
         public abstract string ObjectToString();
-        
+
+        /// <summary>
+        /// parse into an object
+        /// </summary>
+        /// <param name="line"></param>
+        /// <returns></returns>
         public abstract Parser Parse(string line);
-        //public List<Parser> CreateList(List<string> lines)
-        //{
-        //    List<Parser> list = new List<Parser>();
-        //    foreach (string row in lines)
-        //    {
-        //        list.Add(Parse(row));
-        //    }
-
-        //    return list;
-
-        //}
     }
 }

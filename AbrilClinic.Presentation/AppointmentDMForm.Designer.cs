@@ -183,11 +183,9 @@
         private Label lbl_title;
         private Button btn_modify;
         private Button btn_delete;
-        private TextBox txb_name;
         private Label lbl_name;
         private Label label1;
         private Label label2;
-        private TextBox textBox2;
         private DataGridView dgv_appointments;
         private DateTimePicker dtp_appntDate;
         private TextBox txb_dniPatient;

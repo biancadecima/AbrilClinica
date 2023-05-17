@@ -11,14 +11,27 @@ namespace Abril_Clinica.Models
     public class Patient : User
     {
         private int _dni;
-        
+
+        public int Dni { get => _dni; set => _dni = value; }
+
+        /// <summary>
+        /// initialize a patient with data
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="surname"></param>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="isAdmin"></param>
+        /// <param name="dni"></param>
         public Patient(string name, string surname, string username, string password, bool isAdmin, int dni) : base(name, surname, username, password, false)
         {
             _dni = dni;
         }
 
-        public int Dni { get => _dni; set => _dni = value; }
-
+        /// <summary>
+        /// convert a string to a patient
+        /// </summary>
+        /// <param name="line"></param>
         public static explicit operator Patient(string line)
         {
             string separator = ",";
@@ -34,6 +47,10 @@ namespace Abril_Clinica.Models
             return patient;
         }
 
+        /// <summary>
+        /// convert patient to string
+        /// </summary>
+        /// <returns></returns>
         public override string ObjectToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -42,6 +59,11 @@ namespace Abril_Clinica.Models
             return sb.ToString();
         }
 
+        /// <summary>
+        /// parse into a patient
+        /// </summary>
+        /// <param name="line"></param>
+        /// <returns></returns>
         public override Parser Parse(string line)
         {
             Patient patient = (Patient)line;

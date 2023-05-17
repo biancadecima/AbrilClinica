@@ -22,6 +22,9 @@ namespace AbrilClinica.Entities.Database
         {
         }
 
+        /// <summary>
+        ///  creates a user database in case it does not exist
+        /// </summary>
         public void CreateUserArchive()
         {
             if (!File.Exists(_userPath))
@@ -43,6 +46,10 @@ namespace AbrilClinica.Entities.Database
            
 
         }
+
+        /// <summary>
+        /// creates a patient database in case it does not exist
+        /// </summary>
         public void CreatePatientArchive()
         {
             if (!File.Exists(_patientPath))
@@ -55,6 +62,9 @@ namespace AbrilClinica.Entities.Database
             }
         }
 
+        /// <summary>
+        /// creates a admin database in case it does not exist
+        /// </summary>
         public void CreateAdminArchive()
         {
             if (!File.Exists(_adminPath))
@@ -68,6 +78,9 @@ namespace AbrilClinica.Entities.Database
             }
         }
 
+        /// <summary>
+        /// creates a appointment database in case it does not exist
+        /// </summary>
         public void CreateAppointmentArchive()
         {
             if (!File.Exists(_appointmentPath))
@@ -82,13 +95,21 @@ namespace AbrilClinica.Entities.Database
             }
         }
 
+        /// <summary>
+        /// reads a whole database
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public string Read(string path) 
         {
             var text = File.ReadAllText(path);
             return text;
         }
-        
-        
+
+        /// <summary>
+        /// reads the database and returns a list of appointments
+        /// </summary>
+        /// <returns></returns>
         public List<Appointment> GetAppointments()
         {
             string text = Read(_appointmentPath);
@@ -108,6 +129,11 @@ namespace AbrilClinica.Entities.Database
             return appointmentList;
         }
 
+        /// <summary>
+        /// create a list with the appointments of the same ID
+        /// </summary>
+        /// <param name="dni"></param>
+        /// <returns></returns>
         public List<Appointment> GetAppointmentsByDniPatient(int dni)
         {
             List<Appointment> appointmentList = new List<Appointment>();
@@ -123,6 +149,10 @@ namespace AbrilClinica.Entities.Database
             return appointmentsByDniList;
         }
 
+        /// <summary>
+        /// reads the database and returns a list of patients
+        /// </summary>
+        /// <returns></returns>
         public List<Patient> GetPatients()
         {
             string text = Read(_patientPath);
@@ -142,6 +172,12 @@ namespace AbrilClinica.Entities.Database
             return patientList;
         }
 
+        /// <summary>
+        ///  return a patient by its username
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         public Patient GetPatientByUsername(string username)
         {
             List<Patient> patientList = new List<Patient>();
@@ -156,6 +192,10 @@ namespace AbrilClinica.Entities.Database
             throw new ArgumentException($"Nombre usuario no existente");
         }
 
+        /// <summary>
+        /// reads the database and returns a list of admins
+        /// </summary>
+        /// <returns></returns>
         public List<Admin> GetAdmins()
         {
             string text = Read(_adminPath);
@@ -175,6 +215,12 @@ namespace AbrilClinica.Entities.Database
             return adminList;
         }
 
+        /// <summary>
+        /// return an admin by its username
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         public Admin GetAdminByUsername(string username)
         {
             List<Admin> adminList = new List<Admin>();
@@ -189,6 +235,10 @@ namespace AbrilClinica.Entities.Database
             throw new ArgumentException($"Nombre usuario no existente");
         }
 
+        /// <summary>
+        /// reads the database and returns a list of users
+        /// </summary>
+        /// <returns></returns>
         public List<User> GetUsers()
         {
             string text = Read(_userPath);
@@ -208,7 +258,10 @@ namespace AbrilClinica.Entities.Database
             return userList;
         }
 
-
+        /// <summary>
+        /// Write appointments to a database
+        /// </summary>
+        /// <param name="appointments"></param>
         public void SetAppointments(List<Appointment> appointments)
         {
             using StreamWriter sw = new StreamWriter(_appointmentPath);
@@ -220,6 +273,10 @@ namespace AbrilClinica.Entities.Database
             sw.Close();
         }
 
+        /// <summary>
+        /// Write patients to a database
+        /// </summary>
+        /// <param name="patients"></param>
         public void SetPatients(List<Patient> patients)
         {
             using StreamWriter sw = new StreamWriter(_patientPath);
@@ -229,6 +286,10 @@ namespace AbrilClinica.Entities.Database
             }
         }
 
+        /// <summary>
+        /// Write admins to a database
+        /// </summary>
+        /// <param name="admins"></param>
         public void SetAdmins(List<Admin> admins)
         {
             using StreamWriter sw = new StreamWriter(_adminPath);
@@ -238,6 +299,10 @@ namespace AbrilClinica.Entities.Database
             }
         }
 
+        /// <summary>
+        /// Write patients and admin to a database
+        /// </summary>
+        /// <param name="patients"></param>
         public void SetUsers(List<Patient> patients)
         {
             using StreamWriter sw = new StreamWriter(_userPath);

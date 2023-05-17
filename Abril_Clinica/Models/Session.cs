@@ -11,11 +11,23 @@ namespace AbrilClinica.Entities.Models
 {
     public class Session
     {
+        /// <summary>
+        /// Verify that the user is an administrator
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public static bool IsAnAdminSession(User user)
         {
             return user.IsAdmin == true;
         }
 
+        /// <summary>
+        /// Verify that the user exists
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="users"></param>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public static bool UserExists(string username, List<User> users, out User user)
         {
             user = null!;
@@ -30,6 +42,12 @@ namespace AbrilClinica.Entities.Models
             return false;
         }
 
+        /// <summary>
+        /// Verifies that the user agrees with the password entered
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public static bool IsCorrectPassword(User user, string password)
         {
              if (user.Password == password) return true;

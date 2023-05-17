@@ -22,6 +22,9 @@ namespace AbrilClinica.UI
         private Patient _patient;
         private int index;
 
+        /// <summary>
+        ///  initializes the form and instantiates an appointments list, the appointments controller
+        /// </summary>
         public AppointmentListForm()
         {
             InitializeComponent();
@@ -29,23 +32,41 @@ namespace AbrilClinica.UI
             _appointments = new List<Appointment>();
         }
 
+        /// <summary>
+        /// Receives the patient in charge of navigation
+        /// </summary>
+        /// <param name="patient"></param>
         public AppointmentListForm(Patient patient) : this()
         {
              _patient = patient;
         }
 
+        /// <summary>
+        /// update the datagrid with the list of patients
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AppointmentListForm_Load(object sender, EventArgs e)
         {
             _appointments = _appointmentController.GetAppointmentsByDniPatient(_patient.Dni);
             ActualizeDataGrid(_appointments); 
         }
 
+        /// <summary>
+        /// update the datagrid with the list of appointments
+        /// </summary>
+        /// <param name="appointments"></param>
         public void ActualizeDataGrid(List<Appointment> appointments)
         {
             dgv_appointments.DataSource = null;
             dgv_appointments.DataSource = appointments;
         }
 
+        /// <summary>
+        /// select a appointment with double click event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dgv_appointment_DoubleClick(object sender, EventArgs e)
         {
             try
@@ -61,6 +82,11 @@ namespace AbrilClinica.UI
             }
         }
 
+        /// <summary>
+        /// delete a appointment to the list and set it in the appointment and user database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_delete_Click(object sender, EventArgs e)
         {
             DialogResult option = MessageBox.Show("¿Desea eliminar el turno?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -71,8 +97,6 @@ namespace AbrilClinica.UI
                 ActualizeDataGrid(_appointments);
                 _appointmentController.SetAppointments(_appointments);
             }
-        }
-
-        
+        }       
     }
 }

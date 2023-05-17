@@ -35,12 +35,11 @@
             this.btn_maximize = new System.Windows.Forms.PictureBox();
             this.btn_close = new System.Windows.Forms.PictureBox();
             this.pnl_verticalmenu = new System.Windows.Forms.Panel();
-            this.btn_logOut = new System.Windows.Forms.Button();
+            this.btn_appointment = new System.Windows.Forms.Button();
             this.btn_apptview = new System.Windows.Forms.Button();
             this.btn_doclistview = new System.Windows.Forms.Button();
             this.btn_patientmngmt = new System.Windows.Forms.Button();
             this.btn_apptmngmt = new System.Windows.Forms.Button();
-            this.btn_appointment = new System.Windows.Forms.Button();
             this.pnl_container = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pnl_title.SuspendLayout();
@@ -65,6 +64,9 @@
             this.pnl_title.Name = "pnl_title";
             this.pnl_title.Size = new System.Drawing.Size(1300, 35);
             this.pnl_title.TabIndex = 3;
+            this.pnl_title.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnl_title_MouseDown);
+            this.pnl_title.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnl_title_MouseMove);
+            this.pnl_title.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pnl_title_MouseUp);
             // 
             // btn_restore
             // 
@@ -122,7 +124,6 @@
             // pnl_verticalmenu
             // 
             this.pnl_verticalmenu.BackColor = System.Drawing.Color.SteelBlue;
-            this.pnl_verticalmenu.Controls.Add(this.btn_logOut);
             this.pnl_verticalmenu.Controls.Add(this.btn_appointment);
             this.pnl_verticalmenu.Controls.Add(this.btn_apptview);
             this.pnl_verticalmenu.Controls.Add(this.btn_doclistview);
@@ -134,20 +135,20 @@
             this.pnl_verticalmenu.Size = new System.Drawing.Size(217, 615);
             this.pnl_verticalmenu.TabIndex = 4;
             // 
-            // btn_logOut
+            // btn_appointment
             // 
-            this.btn_logOut.BackColor = System.Drawing.Color.White;
-            this.btn_logOut.FlatAppearance.BorderSize = 0;
-            this.btn_logOut.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MidnightBlue;
-            this.btn_logOut.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_logOut.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btn_logOut.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btn_logOut.Location = new System.Drawing.Point(0, 583);
-            this.btn_logOut.Name = "btn_logOut";
-            this.btn_logOut.Size = new System.Drawing.Size(217, 32);
-            this.btn_logOut.TabIndex = 12;
-            this.btn_logOut.Text = "Cerrar sesión";
-            this.btn_logOut.UseVisualStyleBackColor = false;
+            this.btn_appointment.FlatAppearance.BorderSize = 0;
+            this.btn_appointment.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MidnightBlue;
+            this.btn_appointment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_appointment.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btn_appointment.ForeColor = System.Drawing.Color.White;
+            this.btn_appointment.Location = new System.Drawing.Point(0, 130);
+            this.btn_appointment.Name = "btn_appointment";
+            this.btn_appointment.Size = new System.Drawing.Size(217, 32);
+            this.btn_appointment.TabIndex = 0;
+            this.btn_appointment.Text = "Solicitar turno";
+            this.btn_appointment.UseVisualStyleBackColor = true;
+            this.btn_appointment.Click += new System.EventHandler(this.btn_appointment_Click);
             // 
             // btn_apptview
             // 
@@ -208,21 +209,6 @@
             this.btn_apptmngmt.Text = "Gestionar Turnos";
             this.btn_apptmngmt.UseVisualStyleBackColor = true;
             this.btn_apptmngmt.Click += new System.EventHandler(this.btn_apptmngmt_Click);
-            // 
-            // btn_appointment
-            // 
-            this.btn_appointment.FlatAppearance.BorderSize = 0;
-            this.btn_appointment.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MidnightBlue;
-            this.btn_appointment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_appointment.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btn_appointment.ForeColor = System.Drawing.Color.White;
-            this.btn_appointment.Location = new System.Drawing.Point(0, 130);
-            this.btn_appointment.Name = "btn_appointment";
-            this.btn_appointment.Size = new System.Drawing.Size(217, 32);
-            this.btn_appointment.TabIndex = 0;
-            this.btn_appointment.Text = "Solicitar turno";
-            this.btn_appointment.UseVisualStyleBackColor = true;
-            this.btn_appointment.Click += new System.EventHandler(this.btn_appointment_Click);
             // 
             // pnl_container
             // 
@@ -288,6 +274,5 @@
         private Button btn_apptmngmt;
         private Button btn_apptview;
         private Button btn_doclistview;
-        private Button btn_logOut;
     }
 }

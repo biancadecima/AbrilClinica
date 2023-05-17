@@ -2,6 +2,8 @@
 using AbrilClinica.Entities.Database;
 using AbrilClinica.Entities.Models;
 using AbrilClinica.UI;
+using Google.Cloud.Firestore.V1;
+using Microsoft.VisualBasic.Devices;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,6 +23,11 @@ namespace AbrilClinic.Presentation
         private Admin _admin;
         private PatientController _patientController;
         private AdminController _adminController;
+        int m, mx, my;
+
+        /// <summary>
+        /// Initializes the menu, the patient controller and the admin controller
+        /// </summary>
         private MenuForm()
         {
             InitializeComponent();
@@ -28,12 +35,21 @@ namespace AbrilClinic.Presentation
             _patientController= new PatientController();
         }
 
+        /// <summary>
+        /// Overloads the initialization constructor and receives the user who performs the navigation
+        /// </summary>
+        /// <param name="user"></param>
         public MenuForm(User user):this()
         {
             _user = user;
 
         }
 
+        /// <summary>
+        /// Loads the Main Menu form, makes it mdi parent and manages the button view
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MenuForm_Load(object sender, EventArgs e)
         {
             IsMdiContainer = true;
@@ -57,6 +73,11 @@ namespace AbrilClinic.Presentation
 
         }
 
+        /// <summary>
+        /// Instantiate and display the appointment form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_appointment_Click(object sender, EventArgs e)
         {
             var childAppointmentForm = new AppointmentForm(_patient);
@@ -73,6 +94,11 @@ namespace AbrilClinic.Presentation
             
         }
 
+        /// <summary>
+        /// Instantiate and display the appointment view form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_apptview_Click(object sender, EventArgs e)
         {
             var childAppointmentListForm = new AppointmentListForm(_patient);
@@ -86,6 +112,11 @@ namespace AbrilClinic.Presentation
             childAppointmentListForm.Show();
         }
 
+        /// <summary>
+        /// Request and show the medical view form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_doclistview_Click(object sender, EventArgs e)
         {
             var childDoctorListForm = new DoctorListForm();
@@ -99,6 +130,11 @@ namespace AbrilClinic.Presentation
             childDoctorListForm.Show();
         }
 
+        /// <summary>
+        /// Instantiate and display the turn management form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_apptmngmt_Click(object sender, EventArgs e)
         {
             var childAppointmentDMForm = new AppointmentDMForm();
@@ -112,6 +148,11 @@ namespace AbrilClinic.Presentation
             childAppointmentDMForm.Show();
         }
 
+        /// <summary>
+        /// Instantiate and display the patient management form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_patientmngmt_Click(object sender, EventArgs e)
         {
             var childPatientADMForm = new PatientADMForm();
@@ -125,11 +166,21 @@ namespace AbrilClinic.Presentation
             childPatientADMForm.Show();
         }
 
+        /// <summary>
+        /// Closes the application
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_close_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
+        /// <summary>
+        /// Maximizes the window form 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_maximize_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
@@ -137,6 +188,11 @@ namespace AbrilClinic.Presentation
             btn_restore.Visible = true;
         }
 
+        /// <summary>
+        /// Restores the form window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_restore_Click(object sender, EventArgs e)
         {
             this.WindowState= FormWindowState.Normal;
@@ -145,11 +201,49 @@ namespace AbrilClinic.Presentation
 
         }
 
+        /// <summary>
+        /// Minimizes the form window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_minimize_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
 
-    
+        /// <summary>
+        /// Sets position of the window in cardinal axes when the click is held down
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pnl_title_MouseDown(object sender, MouseEventArgs e)
+        {
+            m = 1;
+            mx = e.X;
+            my = e.Y;
+        }
+
+        /// <summary>
+        /// Moves the window depending on the mouse position
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pnl_title_MouseMove(object sender, MouseEventArgs e)
+        {
+            if(m == 1)
+            {
+                this.SetDesktopLocation(MousePosition.X - mx, MousePosition.Y - my);
+            }
+        }
+
+        /// <summary>
+        /// Sets the position of the window when the mouse click is released
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pnl_title_MouseUp(object sender, MouseEventArgs e)
+        {
+            m = 0;
+        }
     }
 }

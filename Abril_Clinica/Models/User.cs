@@ -25,6 +25,14 @@ namespace Abril_Clinica.Models
         [Browsable(false)]
         public bool IsAdmin { get => _isAdmin;}
 
+        /// <summary>
+        /// initialize a user with data
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="surname"></param>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="isAdmin"></param>
         protected User(string name, string surname, string username, string password, bool isAdmin)
         {
             Name = name;
@@ -34,10 +42,17 @@ namespace Abril_Clinica.Models
             _isAdmin = isAdmin;
         }
 
+        /// <summary>
+        /// initialize a user
+        /// </summary>
         public User()
         {
         }
 
+        /// <summary>
+        /// convert a string to a user
+        /// </summary>
+        /// <param name="line"></param>
         public static explicit operator User(string line)
         {
             string separator = ",";
@@ -53,6 +68,10 @@ namespace Abril_Clinica.Models
             return user;
         }
 
+        /// <summary>
+        /// convert user to string
+        /// </summary>
+        /// <returns></returns>
         public override string ObjectToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -60,6 +79,11 @@ namespace Abril_Clinica.Models
             return sb.ToString();
         }
 
+        /// <summary>
+        /// parse into a user
+        /// </summary>
+        /// <param name="line"></param>
+        /// <returns></returns>
         public override Parser Parse(string line)
         {
             User user = (User)line;

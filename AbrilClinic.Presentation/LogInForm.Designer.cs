@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.Label lbl_password;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LogInForm));
             this.lbl_username = new System.Windows.Forms.Label();
             this.tbx_username = new System.Windows.Forms.TextBox();
             this.tbx_password = new System.Windows.Forms.TextBox();
@@ -37,7 +38,11 @@
             this.lbl_title2 = new System.Windows.Forms.Label();
             this.btn_autofill_patient = new System.Windows.Forms.Button();
             this.btn_autofill_admin = new System.Windows.Forms.Button();
+            this.pbx_show = new System.Windows.Forms.PictureBox();
+            this.pbx_hide = new System.Windows.Forms.PictureBox();
             lbl_password = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.pbx_show)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbx_hide)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl_password
@@ -71,9 +76,9 @@
             // 
             // tbx_password
             // 
-            this.tbx_password.Location = new System.Drawing.Point(192, 262);
+            this.tbx_password.Location = new System.Drawing.Point(192, 271);
             this.tbx_password.Name = "tbx_password";
-            this.tbx_password.Size = new System.Drawing.Size(219, 23);
+            this.tbx_password.Size = new System.Drawing.Size(179, 23);
             this.tbx_password.TabIndex = 3;
             // 
             // btn_logIn
@@ -146,12 +151,36 @@
             this.btn_autofill_admin.UseVisualStyleBackColor = false;
             this.btn_autofill_admin.Click += new System.EventHandler(this.btn_autofill_admin_Click);
             // 
+            // pbx_show
+            // 
+            this.pbx_show.Image = ((System.Drawing.Image)(resources.GetObject("pbx_show.Image")));
+            this.pbx_show.Location = new System.Drawing.Point(377, 271);
+            this.pbx_show.Name = "pbx_show";
+            this.pbx_show.Size = new System.Drawing.Size(43, 26);
+            this.pbx_show.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbx_show.TabIndex = 9;
+            this.pbx_show.TabStop = false;
+            this.pbx_show.Click += new System.EventHandler(this.pbx_show_Click);
+            // 
+            // pbx_hide
+            // 
+            this.pbx_hide.Image = ((System.Drawing.Image)(resources.GetObject("pbx_hide.Image")));
+            this.pbx_hide.Location = new System.Drawing.Point(373, 271);
+            this.pbx_hide.Name = "pbx_hide";
+            this.pbx_hide.Size = new System.Drawing.Size(47, 25);
+            this.pbx_hide.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbx_hide.TabIndex = 10;
+            this.pbx_hide.TabStop = false;
+            this.pbx_hide.Click += new System.EventHandler(this.pbx_hide_Click);
+            // 
             // LogInForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(615, 450);
+            this.Controls.Add(this.pbx_hide);
+            this.Controls.Add(this.pbx_show);
             this.Controls.Add(this.btn_autofill_admin);
             this.Controls.Add(this.btn_autofill_patient);
             this.Controls.Add(this.lbl_title2);
@@ -166,6 +195,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registrarse";
             this.Load += new System.EventHandler(this.LogInForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pbx_show)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbx_hide)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -182,5 +213,7 @@
         private Label lbl_title2;
         private Button btn_autofill_patient;
         private Button btn_autofill_admin;
+        private PictureBox pbx_show;
+        private PictureBox pbx_hide;
     }
 }
