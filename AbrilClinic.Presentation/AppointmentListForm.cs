@@ -48,6 +48,7 @@ namespace AbrilClinica.UI
         /// <param name="e"></param>
         private void AppointmentListForm_Load(object sender, EventArgs e)
         {
+            _appointmentController.CreateAppointments();
             _appointments = _appointmentController.GetAppointmentsByDniPatient(_patient.Dni);
             ActualizeDataGrid(_appointments); 
         }
@@ -81,7 +82,7 @@ namespace AbrilClinica.UI
             }
             catch
             {
-                MessageBox.Show("Presione sobre la flecha en la columna izquierda para seleccionar un turno.");
+                MessageBox.Show("No se pudo seleccionar un turno. Reintente.");
             }
         }
 

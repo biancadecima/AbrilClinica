@@ -171,7 +171,7 @@
             this.dgv_appointments.RowTemplate.Height = 25;
             this.dgv_appointments.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_appointments.Size = new System.Drawing.Size(986, 304);
-            this.dgv_appointments.TabIndex = 16;
+            this.dgv_appointments.TabIndex = 0;
             this.dgv_appointments.DoubleClick += new System.EventHandler(this.dgv_appointments_DoubleClick);
             // 
             // dtp_appntDate

@@ -86,7 +86,7 @@ namespace AbrilClinica.UI
             }
             catch
             {
-                MessageBox.Show("Presione sobre la flecha en la columna izquierda para seleccionar un turno.");
+                MessageBox.Show("No se pudo seleccionar un turno. Reintente.");
             }
         }
 

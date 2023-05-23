@@ -35,23 +35,25 @@
             this.btn_maximize = new System.Windows.Forms.PictureBox();
             this.btn_close = new System.Windows.Forms.PictureBox();
             this.pnl_verticalmenu = new System.Windows.Forms.Panel();
+            this.pbx_menu = new System.Windows.Forms.PictureBox();
             this.btn_appointment = new System.Windows.Forms.Button();
             this.btn_apptview = new System.Windows.Forms.Button();
+            this.btn_apptmngmt = new System.Windows.Forms.Button();
             this.btn_doclistview = new System.Windows.Forms.Button();
             this.btn_patientmngmt = new System.Windows.Forms.Button();
-            this.btn_apptmngmt = new System.Windows.Forms.Button();
             this.pnl_container = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pbx_central = new System.Windows.Forms.PictureBox();
             this.pnl_title.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btn_restore)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_minimize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_maximize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_close)).BeginInit();
             this.pnl_verticalmenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbx_menu)).BeginInit();
             this.pnl_container.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbx_central)).BeginInit();
             this.SuspendLayout();
             // 
             // pnl_title
@@ -126,7 +128,7 @@
             // pnl_verticalmenu
             // 
             this.pnl_verticalmenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(74)))), ((int)(((byte)(173)))));
-            this.pnl_verticalmenu.Controls.Add(this.pictureBox1);
+            this.pnl_verticalmenu.Controls.Add(this.pbx_menu);
             this.pnl_verticalmenu.Controls.Add(this.btn_appointment);
             this.pnl_verticalmenu.Controls.Add(this.btn_apptview);
             this.pnl_verticalmenu.Controls.Add(this.btn_apptmngmt);
@@ -137,6 +139,16 @@
             this.pnl_verticalmenu.Name = "pnl_verticalmenu";
             this.pnl_verticalmenu.Size = new System.Drawing.Size(217, 615);
             this.pnl_verticalmenu.TabIndex = 4;
+            // 
+            // pbx_menu
+            // 
+            this.pbx_menu.Image = ((System.Drawing.Image)(resources.GetObject("pbx_menu.Image")));
+            this.pbx_menu.Location = new System.Drawing.Point(0, 0);
+            this.pbx_menu.Name = "pbx_menu";
+            this.pbx_menu.Size = new System.Drawing.Size(220, 61);
+            this.pbx_menu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbx_menu.TabIndex = 7;
+            this.pbx_menu.TabStop = false;
             // 
             // btn_appointment
             // 
@@ -168,6 +180,21 @@
             this.btn_apptview.UseVisualStyleBackColor = true;
             this.btn_apptview.Click += new System.EventHandler(this.btn_apptview_Click);
             // 
+            // btn_apptmngmt
+            // 
+            this.btn_apptmngmt.FlatAppearance.BorderSize = 0;
+            this.btn_apptmngmt.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MidnightBlue;
+            this.btn_apptmngmt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_apptmngmt.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btn_apptmngmt.ForeColor = System.Drawing.Color.White;
+            this.btn_apptmngmt.Location = new System.Drawing.Point(0, 116);
+            this.btn_apptmngmt.Name = "btn_apptmngmt";
+            this.btn_apptmngmt.Size = new System.Drawing.Size(217, 32);
+            this.btn_apptmngmt.TabIndex = 8;
+            this.btn_apptmngmt.Text = "Gestionar Turnos";
+            this.btn_apptmngmt.UseVisualStyleBackColor = true;
+            this.btn_apptmngmt.Click += new System.EventHandler(this.btn_apptmngmt_Click);
+            // 
             // btn_doclistview
             // 
             this.btn_doclistview.FlatAppearance.BorderSize = 0;
@@ -198,24 +225,10 @@
             this.btn_patientmngmt.UseVisualStyleBackColor = true;
             this.btn_patientmngmt.Click += new System.EventHandler(this.btn_patientmngmt_Click);
             // 
-            // btn_apptmngmt
-            // 
-            this.btn_apptmngmt.FlatAppearance.BorderSize = 0;
-            this.btn_apptmngmt.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MidnightBlue;
-            this.btn_apptmngmt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_apptmngmt.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btn_apptmngmt.ForeColor = System.Drawing.Color.White;
-            this.btn_apptmngmt.Location = new System.Drawing.Point(0, 116);
-            this.btn_apptmngmt.Name = "btn_apptmngmt";
-            this.btn_apptmngmt.Size = new System.Drawing.Size(217, 32);
-            this.btn_apptmngmt.TabIndex = 8;
-            this.btn_apptmngmt.Text = "Gestionar Turnos";
-            this.btn_apptmngmt.UseVisualStyleBackColor = true;
-            this.btn_apptmngmt.Click += new System.EventHandler(this.btn_apptmngmt_Click);
-            // 
             // pnl_container
             // 
-            this.pnl_container.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnl_container.BackColor = System.Drawing.Color.White;
+            this.pnl_container.Controls.Add(this.pbx_central);
             this.pnl_container.Controls.Add(this.pictureBox2);
             this.pnl_container.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnl_container.ForeColor = System.Drawing.Color.Black;
@@ -236,15 +249,15 @@
             this.pictureBox2.TabIndex = 6;
             this.pictureBox2.TabStop = false;
             // 
-            // pictureBox1
+            // pbx_central
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(220, 61);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 7;
-            this.pictureBox1.TabStop = false;
+            this.pbx_central.Image = ((System.Drawing.Image)(resources.GetObject("pbx_central.Image")));
+            this.pbx_central.Location = new System.Drawing.Point(286, 126);
+            this.pbx_central.Name = "pbx_central";
+            this.pbx_central.Size = new System.Drawing.Size(499, 328);
+            this.pbx_central.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbx_central.TabIndex = 7;
+            this.pbx_central.TabStop = false;
             // 
             // MenuForm
             // 
@@ -266,9 +279,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.btn_maximize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_close)).EndInit();
             this.pnl_verticalmenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbx_menu)).EndInit();
             this.pnl_container.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbx_central)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -288,6 +302,7 @@
         private Button btn_apptmngmt;
         private Button btn_apptview;
         private Button btn_doclistview;
-        private PictureBox pictureBox1;
+        private PictureBox pbx_menu;
+        private PictureBox pbx_central;
     }
 }

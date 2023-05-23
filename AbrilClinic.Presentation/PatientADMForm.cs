@@ -119,7 +119,7 @@ namespace AbrilClinica.UI
                     txb_password.Text = selectedPatient.Password;
                     txb_dni.Text = selectedPatient.Dni.ToString();
                 }
-            } catch { MessageBox.Show("Presione sobre la flecha en la columna izquierda para seleccionar un paciente"); }
+            } catch { MessageBox.Show("No se pudo seleccionar un paciente. Reintente"); }
             
         }
 
