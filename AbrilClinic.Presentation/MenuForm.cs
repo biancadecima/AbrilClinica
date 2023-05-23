@@ -1,6 +1,6 @@
 ﻿using Abril_Clinica.Models;
 using AbrilClinica.Entities.Database;
-using AbrilClinica.Entities.Models;
+using AbrilClinica.Entities.Utilities;
 using AbrilClinica.UI;
 using Google.Cloud.Firestore.V1;
 using Microsoft.VisualBasic.Devices;

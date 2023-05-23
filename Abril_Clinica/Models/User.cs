@@ -1,5 +1,4 @@
-﻿//using AbrilClinica.Entities.DataManagment;
-using AbrilClinica.Entities.Models;
+﻿using AbrilClinica.Entities.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

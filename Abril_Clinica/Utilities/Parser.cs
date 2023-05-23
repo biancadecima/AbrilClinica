@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AbrilClinica.Entities.Models
+namespace AbrilClinica.Entities.Utilities
 {
     public abstract class Parser
     {

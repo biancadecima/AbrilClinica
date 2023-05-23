@@ -1,4 +1,5 @@
 ﻿using Abril_Clinica.Models;
+using AbrilClinica.Entities.Utilities;
 using System.ComponentModel;
 using System.Text;
 

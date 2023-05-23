@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AbrilClinica.Entities.Models
+namespace AbrilClinica.Entities.Utilities
 {
     public class Session
     {
@@ -31,9 +31,9 @@ namespace AbrilClinica.Entities.Models
         public static bool UserExists(string username, List<User> users, out User user)
         {
             user = null!;
-            foreach(var u in users)
+            foreach (var u in users)
             {
-                if(u.Username == username)
+                if (u.Username == username)
                 {
                     user = u;
                     return true;
@@ -50,7 +50,7 @@ namespace AbrilClinica.Entities.Models
         /// <returns></returns>
         public static bool IsCorrectPassword(User user, string password)
         {
-             if (user.Password == password) return true;
+            if (user.Password == password) return true;
             return false;
         }
 

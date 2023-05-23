@@ -1,6 +1,5 @@
 using AbrilClinica.Entities.Utilities;
 using Abril_Clinica.Models;
-using AbrilClinica.Entities.Models;
 using Google.Type;
 using System.Collections.Generic;
 using System.IO;
@@ -39,6 +38,8 @@ namespace AbrilClinic.Presentation
         {    
             _userController.CreateUsers();
             _users = _userController.GetUsers();
+            pbx_show.BringToFront();
+            tbx_password.PasswordChar = '*';
         }
 
         /// <summary>
@@ -106,9 +107,6 @@ namespace AbrilClinic.Presentation
             pbx_show.BringToFront();
             tbx_password.PasswordChar = '*';
         }
-
-        
-
-        
+ 
     }
 }
