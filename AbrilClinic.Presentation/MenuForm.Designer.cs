@@ -42,6 +42,7 @@
             this.btn_apptmngmt = new System.Windows.Forms.Button();
             this.pnl_container = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pnl_title.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btn_restore)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_minimize)).BeginInit();
@@ -50,11 +51,12 @@
             this.pnl_verticalmenu.SuspendLayout();
             this.pnl_container.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // pnl_title
             // 
-            this.pnl_title.BackColor = System.Drawing.Color.SteelBlue;
+            this.pnl_title.BackColor = System.Drawing.SystemColors.HotTrack;
             this.pnl_title.Controls.Add(this.btn_restore);
             this.pnl_title.Controls.Add(this.btn_minimize);
             this.pnl_title.Controls.Add(this.btn_maximize);
@@ -123,12 +125,13 @@
             // 
             // pnl_verticalmenu
             // 
-            this.pnl_verticalmenu.BackColor = System.Drawing.Color.SteelBlue;
+            this.pnl_verticalmenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(74)))), ((int)(((byte)(173)))));
+            this.pnl_verticalmenu.Controls.Add(this.pictureBox1);
             this.pnl_verticalmenu.Controls.Add(this.btn_appointment);
             this.pnl_verticalmenu.Controls.Add(this.btn_apptview);
+            this.pnl_verticalmenu.Controls.Add(this.btn_apptmngmt);
             this.pnl_verticalmenu.Controls.Add(this.btn_doclistview);
             this.pnl_verticalmenu.Controls.Add(this.btn_patientmngmt);
-            this.pnl_verticalmenu.Controls.Add(this.btn_apptmngmt);
             this.pnl_verticalmenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnl_verticalmenu.Location = new System.Drawing.Point(0, 35);
             this.pnl_verticalmenu.Name = "pnl_verticalmenu";
@@ -142,7 +145,7 @@
             this.btn_appointment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_appointment.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_appointment.ForeColor = System.Drawing.Color.White;
-            this.btn_appointment.Location = new System.Drawing.Point(0, 130);
+            this.btn_appointment.Location = new System.Drawing.Point(3, 67);
             this.btn_appointment.Name = "btn_appointment";
             this.btn_appointment.Size = new System.Drawing.Size(217, 32);
             this.btn_appointment.TabIndex = 0;
@@ -157,7 +160,7 @@
             this.btn_apptview.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_apptview.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_apptview.ForeColor = System.Drawing.Color.White;
-            this.btn_apptview.Location = new System.Drawing.Point(0, 168);
+            this.btn_apptview.Location = new System.Drawing.Point(0, 105);
             this.btn_apptview.Name = "btn_apptview";
             this.btn_apptview.Size = new System.Drawing.Size(217, 32);
             this.btn_apptview.TabIndex = 11;
@@ -172,7 +175,7 @@
             this.btn_doclistview.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_doclistview.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_doclistview.ForeColor = System.Drawing.Color.White;
-            this.btn_doclistview.Location = new System.Drawing.Point(0, 206);
+            this.btn_doclistview.Location = new System.Drawing.Point(0, 143);
             this.btn_doclistview.Name = "btn_doclistview";
             this.btn_doclistview.Size = new System.Drawing.Size(217, 32);
             this.btn_doclistview.TabIndex = 10;
@@ -187,7 +190,7 @@
             this.btn_patientmngmt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_patientmngmt.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_patientmngmt.ForeColor = System.Drawing.Color.White;
-            this.btn_patientmngmt.Location = new System.Drawing.Point(3, 168);
+            this.btn_patientmngmt.Location = new System.Drawing.Point(3, 67);
             this.btn_patientmngmt.Name = "btn_patientmngmt";
             this.btn_patientmngmt.Size = new System.Drawing.Size(217, 32);
             this.btn_patientmngmt.TabIndex = 9;
@@ -202,7 +205,7 @@
             this.btn_apptmngmt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_apptmngmt.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_apptmngmt.ForeColor = System.Drawing.Color.White;
-            this.btn_apptmngmt.Location = new System.Drawing.Point(0, 130);
+            this.btn_apptmngmt.Location = new System.Drawing.Point(0, 116);
             this.btn_apptmngmt.Name = "btn_apptmngmt";
             this.btn_apptmngmt.Size = new System.Drawing.Size(217, 32);
             this.btn_apptmngmt.TabIndex = 8;
@@ -233,6 +236,16 @@
             this.pictureBox2.TabIndex = 6;
             this.pictureBox2.TabStop = false;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(220, 61);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 7;
+            this.pictureBox1.TabStop = false;
+            // 
             // MenuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -255,6 +268,7 @@
             this.pnl_verticalmenu.ResumeLayout(false);
             this.pnl_container.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -274,5 +288,6 @@
         private Button btn_apptmngmt;
         private Button btn_apptview;
         private Button btn_doclistview;
+        private PictureBox pictureBox1;
     }
 }

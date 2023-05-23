@@ -50,6 +50,10 @@ namespace AbrilClinica.UI
             dgv_doctors.DataSource = admins;
             this.dgv_doctors.Columns["Password"].Visible = false;
             this.dgv_doctors.Columns["Username"].Visible = false;
+            dgv_doctors.Columns[0].HeaderText = "ID";
+            dgv_doctors.Columns[1].HeaderText = "Especialidad";
+            dgv_doctors.Columns[2].HeaderText = "Nombre";
+            dgv_doctors.Columns[3].HeaderText = "Apellido";
         }
     }
 }

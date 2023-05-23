@@ -60,6 +60,9 @@ namespace AbrilClinica.UI
         {
             dgv_appointments.DataSource = null;
             dgv_appointments.DataSource = appointments;
+            dgv_appointments.Columns[0].HeaderText = "DNI del Paciente";
+            dgv_appointments.Columns[1].HeaderText = "Especialidad";
+            dgv_appointments.Columns[2].HeaderText = "Fecha";
         }
 
         /// <summary>

@@ -54,6 +54,11 @@ namespace AbrilClinica.UI
         {
             dgv_patients.DataSource = null;
             dgv_patients.DataSource = patients;
+            dgv_patients.Columns[0].HeaderText = "DNI";
+            dgv_patients.Columns[1].HeaderText = "Nombre";
+            dgv_patients.Columns[2].HeaderText = "Apellido";
+            dgv_patients.Columns[3].HeaderText = "Nombre de Usuario";
+            dgv_patients.Columns[4].HeaderText = "Contraseña";
         }
 
         /// <summary>
