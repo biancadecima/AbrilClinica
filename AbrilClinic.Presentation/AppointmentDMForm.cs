@@ -1,6 +1,8 @@
 ﻿using Abril_Clinica.Models;
 using AbrilClinica.Entities.Database;
+using AbrilClinica.Entities.Logs;
 using AbrilClinica.Entities.Models;
+using AbrilClinica.Entities.Reports;
 using AbrilClinica.Entities.Utilities;
 using System;
 using System.Collections.Generic;
@@ -11,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static AbrilClinica.Entities.Reports.ReportManagment;
 
 namespace AbrilClinica.UI
 {
@@ -18,6 +21,8 @@ namespace AbrilClinica.UI
     {
         private AppointmentController _appointmentController;
         private List<Appointment> _appointments;
+        private Appointment _selectedAppointment;
+        private UserLogs _userLogs;
         private int index;
 
         /// <summary>
@@ -27,7 +32,9 @@ namespace AbrilClinica.UI
         {
             InitializeComponent();
             _appointmentController= new AppointmentController();
-            _appointments= new List<Appointment>();
+            _appointments = new List<Appointment>();
+            _selectedAppointment = new Appointment();
+            _userLogs = new UserLogs();
         }
 
         /// <summary>
@@ -35,10 +42,10 @@ namespace AbrilClinica.UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void AppointmentDMForm_Load(object sender, EventArgs e)
+        private async void AppointmentDMForm_Load(object sender, EventArgs e)
         {
-            _appointmentController.CreateAppointments();
-            _appointments = _appointmentController.GetAppointments();
+            _userLogs.Movement += UserLogs.User_Movement;
+            _appointments = await _appointmentController.GetAppointments();
             ActualizeDataGrid(_appointments);
         }
 
@@ -76,12 +83,12 @@ namespace AbrilClinica.UI
                 DataGridViewRow P = dgv_appointments.SelectedRows[0];
                 int s = dgv_appointments.Rows.IndexOf(P);
                 index = s;
-                Appointment selectedAppointment = _appointments[s];
-                if (selectedAppointment != null)
+                _selectedAppointment = _appointments[s];
+                if (_selectedAppointment != null)
                 {
-                    txb_dniPatient.Text = selectedAppointment.DniPatient.ToString();
-                    cbx_specialField.SelectedItem = selectedAppointment.SpecialField;
-                    dtp_appntDate.Value = selectedAppointment.Date;
+                    txb_dniPatient.Text = _selectedAppointment.DniPatient.ToString();
+                    cbx_specialField.SelectedItem = _selectedAppointment.SpecialField;
+                    dtp_appntDate.Value = _selectedAppointment.Date;
                 }
             }
             catch
@@ -95,16 +102,24 @@ namespace AbrilClinica.UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btn_modify_Click(object sender, EventArgs e)
+        private async void btn_modify_Click(object sender, EventArgs e)
         {
-            if (Validator.IsDni(txb_dniPatient.Text, out int patientDni) && Validator.IsString(cbx_specialField.SelectedItem.ToString()!))
+            try
             {
-                Appointment modifiedAppointment = new Appointment(_appointments[index].Id, patientDni, cbx_specialField.SelectedItem.ToString()!, dtp_appntDate.Value);
-                _appointments[index] = modifiedAppointment;
-                index = -1;
-                ActualizeDataGrid(_appointments);
-                _appointmentController.SetAppointments(_appointments);
-                DeleteData();
+                if (Validator.IsDni(txb_dniPatient.Text, out int patientDni) && Validator.IsString(cbx_specialField.SelectedItem.ToString()!))
+                {
+                    Appointment modifiedAppointment = new Appointment(_appointments[index].Id, patientDni, cbx_specialField.SelectedItem.ToString()!, dtp_appntDate.Value);
+                    _appointments[index] = modifiedAppointment;
+                    index = -1;
+                    ActualizeDataGrid(_appointments);
+                    await _appointmentController.Update(modifiedAppointment);
+                    DeleteData();
+                    _userLogs.MakeMovement("El usuario modifico un turno");
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("No se pudo realizar la acción. Reintente.");
             }
         }
 
@@ -113,19 +128,57 @@ namespace AbrilClinica.UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btn_delete_Click(object sender, EventArgs e)
+        private async void btn_delete_Click(object sender, EventArgs e)
         {
-            DialogResult option = MessageBox.Show("¿Desea eliminar el turno?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (option == DialogResult.Yes)
+            try
             {
-                _appointments.RemoveAt(index);
-                index = -1;
-                ActualizeDataGrid(_appointments);
-                _appointmentController.SetAppointments(_appointments);
-                DeleteData();
+                DialogResult option = MessageBox.Show("¿Desea eliminar el turno?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (option == DialogResult.Yes)
+                {
+                    _appointments.RemoveAt(index);
+                    index = -1;
+                    ActualizeDataGrid(_appointments);
+                    await _appointmentController.Delete(_selectedAppointment);
+                    DeleteData();
+                    _userLogs.MakeMovement("El usuario eliminó un turno");
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("No se pudo realizar la accion. Reintente.");
             }
         }
 
-        
+        private void btn_CSVreport_Click(object sender, EventArgs e)
+        {
+            if (_appointments != null)
+            {
+                MakeReport<Appointment> doReport = ExportCSV.appointmentReportCSV;
+                doReport(_appointments);
+                MessageBox.Show("Se ha creado el reporte exitosamente");
+                _userLogs.MakeMovement("El usuario creó un reporte de turnos CSV");
+            }
+            else
+            {
+                MessageBox.Show("No se pudo crear el reporte. Reintente.");
+            }
+                
+        }
+
+        private void btn_JSONreport_Click(object sender, EventArgs e)
+        {
+            if (_appointments != null)
+            {
+                MakeReport<Appointment> doReport = ExportJSON.AppointmentReportJSON;
+                doReport(_appointments);
+                MessageBox.Show("Se ha creado el reporte exitosamente");
+                _userLogs.MakeMovement("El usuario creó un reporte de turnos JSON");
+            }
+            else
+            {
+                MessageBox.Show("No se pudo crear el reporte. Reintente.");
+            }
+                
+        }
     }
 }

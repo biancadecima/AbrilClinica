@@ -13,12 +13,5 @@ namespace AbrilClinica.Entities.Utilities
         /// </summary>
         /// <returns></returns>
         public abstract string ObjectToString();
-
-        /// <summary>
-        /// parse into an object
-        /// </summary>
-        /// <param name="line"></param>
-        /// <returns></returns>
-        public abstract Parser Parse(string line);
     }
 }

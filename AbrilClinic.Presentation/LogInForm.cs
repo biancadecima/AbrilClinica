@@ -9,14 +9,18 @@ using System.Linq.Expressions;
 using User = Abril_Clinica.Models.User;
 using System.ComponentModel.DataAnnotations;
 using System.Windows.Forms;
+using AbrilClinica.Entities.Logs;
 
 namespace AbrilClinic.Presentation
 {
     public partial class LogInForm : Form
     {
-        private UserController _userController;
-        private List<User> _users;
+        private PatientController _patientController;
+        private AdminController _adminController; 
+        private List<Patient> _patients;
+        private List<Admin> _admins;
         private User _user;
+        private UserLogs _userLogs;
 
         /// <summary>
         /// initializes the log in form, the user list, the user controller, and a user
@@ -24,9 +28,12 @@ namespace AbrilClinic.Presentation
         public LogInForm()
         {
             InitializeComponent();
-            _userController = new UserController();
-            _users = new List<User>();
+            _patientController = new PatientController();
+            _adminController = new AdminController();
+            _patients = new List<Patient>();
+            _admins = new List<Admin>();
             _user = new User(); 
+            _userLogs = new UserLogs();
         }
 
         /// <summary>
@@ -34,10 +41,11 @@ namespace AbrilClinic.Presentation
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void LogInForm_Load(object sender, EventArgs e)
+        private async void LogInForm_Load(object sender, EventArgs e)
         {    
-            _userController.CreateUsers();
-            _users = _userController.GetUsers();
+            _admins = await _adminController.GetAdmins();
+            _patients = await _patientController.GetPatients();
+            _userLogs.Movement += UserLogs.User_Movement;
             pbx_show.BringToFront();
             tbx_password.PasswordChar = '*';
         }
@@ -51,8 +59,9 @@ namespace AbrilClinic.Presentation
         {
             try
             {
-                if (Session.UserExists(tbx_username.Text, _users, out _user) && Session.IsCorrectPassword(_user, tbx_password.Text))
+                if (Session.UserExists(tbx_username.Text, _patients, _admins, out _user) && Session.IsCorrectPassword(_user, tbx_password.Text))
                 {
+                    _userLogs.MakeMovement("El usuario ingresó en la aplicación");
                     var principalMenu = new MenuForm(_user);
                     principalMenu.Show();
                     Hide(); 
@@ -60,7 +69,7 @@ namespace AbrilClinic.Presentation
             }
             catch(Exception)
             {
-                MessageBox.Show("No se pudo acceder. Reintente."); // no es lo mas optimo un message box
+                MessageBox.Show("No se pudo acceder. Reintente.");
             }
         }
 

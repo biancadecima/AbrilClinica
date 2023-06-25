@@ -1,6 +1,7 @@
 ﻿using AbrilClinica.Entities.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
@@ -13,6 +14,8 @@ namespace Abril_Clinica.Models
         private int _dni;
 
         public int Dni { get => _dni; set => _dni = value; }
+
+        public Patient() { }
 
         /// <summary>
         /// initialize a patient with data
@@ -32,16 +35,15 @@ namespace Abril_Clinica.Models
         /// convert a string to a patient
         /// </summary>
         /// <param name="line"></param>
-        public static explicit operator Patient(string line)
+        public static explicit operator Patient(DataRow row)
         {
-            string separator = ",";
-            string[] row = line.Split(separator);
-            string name = row[0];
-            string surname = row[1];
-            string username = row[2];
-            string password = row[3];
-            bool isAdmin = Convert.ToBoolean(row[4]);
-            int dni = Convert.ToInt32(row[5]);
+            var name = row["Nombre"].ToString();
+            var surname = row["Apellido"].ToString();
+            var username = row["Usuario"].ToString();
+            var password = row["Contrasenia"].ToString();
+            var isAdmin = Convert.ToBoolean(row["EsAdmin"].ToString());
+            var dni = Convert.ToInt32(row["Dni"].ToString());
+
             Patient patient = new Patient(name, surname, username, password, isAdmin, dni);
 
             return patient;
@@ -64,10 +66,10 @@ namespace Abril_Clinica.Models
         /// </summary>
         /// <param name="line"></param>
         /// <returns></returns>
-        public override Parser Parse(string line)
-        {
-            Patient patient = (Patient)line;
-            return patient;
-        }
+        //public override Parser Parse(string line)
+        //{
+        //    Patient patient = (Patient)line;
+        //    return patient;
+        //}
     }
 }

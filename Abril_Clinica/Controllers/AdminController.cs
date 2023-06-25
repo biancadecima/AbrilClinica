@@ -1,4 +1,6 @@
 ﻿using Abril_Clinica.Models;
+using AbrilClinica.Entities.Handlers;
+using AbrilClinica.Entities.Reports;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,31 +11,23 @@ namespace AbrilClinica.Entities.Database
 {
     public class AdminController
     {
-        private DataBase _database;
+        private AdminHandler _adminHandler;
 
         /// <summary>
         /// instance the database
         /// </summary>
         public AdminController()
         {
-            _database = new DataBase();
-        }
-
-        /// <summary>
-        /// creates a admin database in case it does not exist
-        /// </summary>
-        public void CreateAdmins()
-        {
-            _database.CreateAdminArchive();
+            _adminHandler = new AdminHandler();
         }
 
         /// <summary>
         /// reads the database and returns a list of admins
         /// </summary>
         /// <returns></returns>
-        public List<Admin> GetAdmins()
+        public async Task<List<Admin>> GetAdmins()
         {
-            return _database.GetAdmins();
+            return await _adminHandler.GetAll();
         }
 
         /// <summary>
@@ -41,9 +35,9 @@ namespace AbrilClinica.Entities.Database
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        public Admin GetAdminByUsername(string username)
+        public async Task<Admin> GetAdminByUsername(string username)
         {
-            return _database.GetAdminByUsername(username);
+            return await _adminHandler.GetByUsername(username);
         }
     }
 }

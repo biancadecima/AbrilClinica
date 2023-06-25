@@ -1,6 +1,7 @@
 ﻿using Abril_Clinica.Models;
 using AbrilClinica.Entities.Utilities;
 using System.ComponentModel;
+using System.Data;
 using System.Text;
 
 namespace AbrilClinica.Entities.Models
@@ -13,10 +14,12 @@ namespace AbrilClinica.Entities.Models
         private DateTime _date;
 
         [Browsable(false)]
-        public int Id { get => _id;}
-        public int DniPatient { get => _dniPatient;}
+        public int Id { get => _id; set => _id = value; }
+        public int DniPatient { get => _dniPatient; set => _dniPatient = value; }
         public string SpecialField { get => _specialField; set => _specialField = value; }
         public DateTime Date { get => _date; set => _date = value; }
+
+        public Appointment() { }
 
         /// <summary>
         /// initialize an appointment with data
@@ -37,15 +40,13 @@ namespace AbrilClinica.Entities.Models
         /// convert a string to a appointment
         /// </summary>
         /// <param name="line"></param>
-        public static explicit operator Appointment(string line)
+        public static explicit operator Appointment(/*string line*/ DataRow row)
         {
-            string separator = ",";
-            string[] row = line.Split(separator);
+            var id = Convert.ToInt32(row["Id"].ToString());
+            var dniPatient = Convert.ToInt32(row["DniPaciente"].ToString());
+            var specialField = row["Especialidad"].ToString();
+            var date = DateTime.Parse(row["Fecha"].ToString());
 
-            int id = Convert.ToInt32(row[0]);
-            int dniPatient = Convert.ToInt32(row[1]);
-            string specialField = row[2];
-            DateTime date = DateTime.Parse(row[3]);
             Appointment appt = new Appointment(id, dniPatient, specialField, date);
 
             return appt;
@@ -67,11 +68,11 @@ namespace AbrilClinica.Entities.Models
         /// </summary>
         /// <param name="line"></param>
         /// <returns></returns>
-        public override Parser Parse(string line)
-        {
-            Appointment appointment = (Appointment)line;
-            return appointment;
-        }
+        //public override Parser Parse(string line)
+        //{
+        //    Appointment appointment = (Appointment)line;
+        //    return appointment;
+        //}
 
         /// <summary>
         /// creates new unique id

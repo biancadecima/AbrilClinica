@@ -104,6 +104,7 @@
             this.dgv_appointments.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_appointments.Size = new System.Drawing.Size(1000, 385);
             this.dgv_appointments.TabIndex = 17;
+            this.dgv_appointments.DoubleClick += new System.EventHandler(this.dgv_appointment_DoubleClick);
             // 
             // AppointmentListForm
             // 

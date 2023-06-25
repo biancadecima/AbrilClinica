@@ -83,11 +83,6 @@ namespace Abril_Clinica.Models
         /// </summary>
         /// <param name="line"></param>
         /// <returns></returns>
-        public override Parser Parse(string line)
-        {
-            User user = (User)line;
-            return user;
-        }
 
     }
 }

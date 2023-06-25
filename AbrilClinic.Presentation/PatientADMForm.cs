@@ -1,6 +1,8 @@
 ﻿using Abril_Clinica.Models;
 using AbrilClinica.Entities.Database;
+using AbrilClinica.Entities.Logs;
 using AbrilClinica.Entities.Models;
+using AbrilClinica.Entities.Reports;
 using AbrilClinica.Entities.Utilities;
 using Microsoft.VisualBasic.ApplicationServices;
 using System;
@@ -12,15 +14,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static AbrilClinica.Entities.Reports.ReportManagment;
 
 namespace AbrilClinica.UI
 {
     public partial class PatientADMForm : Form
     {
         private PatientController _patientController;
-        private Patient _patient;
+        private Patient _selectedPatient;
         private List<Patient> _patients;
-        private UserController _userController;
+        private UserLogs _userLogs;
         private int index;
 
         /// <summary>
@@ -30,7 +33,7 @@ namespace AbrilClinica.UI
         {
             InitializeComponent();
             _patientController = new PatientController();
-            _userController = new UserController();
+            _userLogs = new UserLogs();
             _patients = new List<Patient>(); 
         }
 
@@ -39,10 +42,10 @@ namespace AbrilClinica.UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void PatientADMForm_Load(object sender, EventArgs e)
+        private async void PatientADMForm_Load(object sender, EventArgs e)
         {
-            _patientController.CreatePatients();
-            _patients = _patientController.GetPatients();
+            _userLogs.Movement += UserLogs.User_Movement;
+            _patients = await _patientController.GetPatients();
             ActualizeDataGrid(_patients);
         }
 
@@ -78,15 +81,15 @@ namespace AbrilClinica.UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btn_add_Click(object sender, EventArgs e)
+        private async void btn_add_Click(object sender, EventArgs e)
         {
             if(Validator.IsString(txb_name.Text) && Validator.IsString(txb_surname.Text) && Validator.IsString(txb_username.Text) && Validator.IsPassword(txb_password.Text) && Validator.IsDni(txb_dni.Text, out int patientDni))
             {
-                _patient = new Patient(txb_name.Text, txb_surname.Text, txb_username.Text, txb_password.Text, true, patientDni);
-                _patients.Add(_patient);
+                Patient patient = new Patient(txb_name.Text, txb_surname.Text, txb_username.Text, txb_password.Text, true, patientDni);
+                _patients.Add(patient);
                 ActualizeDataGrid(_patients);
-                _patientController.SetPatients(_patients);
-                _userController.SetUsers(_patients);
+                await _patientController.Add(patient);
+                _userLogs.MakeMovement("El usuario agregó un paciente");
             }
             else
             {
@@ -110,14 +113,14 @@ namespace AbrilClinica.UI
                 DataGridViewRow P = dgv_patients.SelectedRows[0];
                 int s = dgv_patients.Rows.IndexOf(P);
                 index = s;
-                Patient selectedPatient = _patients[s];
-                if (selectedPatient != null)
+                _selectedPatient = _patients[s];
+                if (_selectedPatient != null)
                 {
-                    txb_name.Text = selectedPatient.Name;
-                    txb_surname.Text = selectedPatient.Surname;
-                    txb_username.Text = selectedPatient.Username;
-                    txb_password.Text = selectedPatient.Password;
-                    txb_dni.Text = selectedPatient.Dni.ToString();
+                    txb_name.Text = _selectedPatient.Name;
+                    txb_surname.Text = _selectedPatient.Surname;
+                    txb_username.Text = _selectedPatient.Username;
+                    txb_password.Text = _selectedPatient.Password;
+                    txb_dni.Text = _selectedPatient.Dni.ToString();
                 }
             } catch { MessageBox.Show("No se pudo seleccionar un paciente. Reintente"); }
             
@@ -128,7 +131,7 @@ namespace AbrilClinica.UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btn_modify_Click(object sender, EventArgs e)
+        private async void btn_modify_Click(object sender, EventArgs e)
         {
             btn_add.Enabled = true;
             btn_delete.Enabled = true;
@@ -139,8 +142,8 @@ namespace AbrilClinica.UI
                 _patients[index] = modifiedPatient;
                 index = -1;
                 ActualizeDataGrid(_patients);
-                _patientController.SetPatients(_patients);
-                _userController.SetUsers(_patients);
+                await _patientController.Update(modifiedPatient);
+                _userLogs.MakeMovement("El usuario modificó un paciente"); ;
                 DeleteData();
             }
         }
@@ -150,7 +153,7 @@ namespace AbrilClinica.UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btn_delete_Click(object sender, EventArgs e)
+        private async void btn_delete_Click(object sender, EventArgs e)
         {
             btn_add.Enabled = true;
             btn_delete.Enabled = true;
@@ -160,10 +163,45 @@ namespace AbrilClinica.UI
                 _patients.RemoveAt(index);
                 index = -1;
                 ActualizeDataGrid(_patients);
-                _patientController.SetPatients(_patients);
-                _userController.SetUsers(_patients);
+                await _patientController.Delete(_selectedPatient);
+                _userLogs.MakeMovement("El usuario eliminó un paciente");
                 DeleteData();
             }
-        }      
+        }
+
+        private void btn_CSVreport_Click(object sender, EventArgs e)
+        {
+            if (_patients != null)
+            {
+                MakeReport<Patient> doReport = ExportCSV.patientReportCSV;
+                doReport(_patients);
+                //ExportCSV.patientReportCSV(_patients);
+                MessageBox.Show("Se ha creado el reporte exitosamente");
+                _userLogs.MakeMovement("El usuario creó un reporte de pacientes CSV");
+            }
+            else
+            {
+                MessageBox.Show("No se pudo crear el reporte. Reintente.");
+            }
+            
+        }
+
+        private void btn_JSONreport_Click(object sender, EventArgs e)
+        {
+            if (_patients != null)
+            {
+                MakeReport<Patient> doReport = ExportJSON.PatientReportJSON;
+                doReport(_patients);
+
+                //ExportJSON.PatientReportJSON(_patients);
+                MessageBox.Show("Se ha creado el reporte exitosamente");
+                _userLogs.MakeMovement("El usuario creó un reporte de pacientes JSON");
+            }
+            else
+            {
+                MessageBox.Show("No se pudo crear el reporte. Reintente.");
+            }
+               
+        }
     }
 }

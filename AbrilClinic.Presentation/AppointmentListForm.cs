@@ -1,5 +1,6 @@
 ﻿using Abril_Clinica.Models;
 using AbrilClinica.Entities.Database;
+using AbrilClinica.Entities.Logs;
 using AbrilClinica.Entities.Models;
 using AbrilClinica.Entities.Utilities;
 using System;
@@ -20,6 +21,8 @@ namespace AbrilClinica.UI
         private AppointmentController _appointmentController;
         private List<Appointment> _appointments;
         private Patient _patient;
+        private Appointment _selectedAppointment;
+        private UserLogs _userLogs;
         private int index;
 
         /// <summary>
@@ -30,6 +33,8 @@ namespace AbrilClinica.UI
             InitializeComponent();
             _appointmentController = new AppointmentController();
             _appointments = new List<Appointment>();
+            _selectedAppointment = new Appointment();
+            _userLogs = new UserLogs();
         }
 
         /// <summary>
@@ -46,10 +51,10 @@ namespace AbrilClinica.UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void AppointmentListForm_Load(object sender, EventArgs e)
+        private async void AppointmentListForm_Load(object sender, EventArgs e)
         {
-            _appointmentController.CreateAppointments();
-            _appointments = _appointmentController.GetAppointmentsByDniPatient(_patient.Dni);
+            _userLogs.Movement += UserLogs.User_Movement;
+            _appointments = await _appointmentController.GetAppointmentsByDniPatient(_patient.Dni);
             ActualizeDataGrid(_appointments); 
         }
 
@@ -86,6 +91,7 @@ namespace AbrilClinica.UI
             }
         }
 
+
         /// <summary>
         /// delete a appointment to the list and set it in the appointment and user database
         /// </summary>
@@ -93,14 +99,22 @@ namespace AbrilClinica.UI
         /// <param name="e"></param>
         private void btn_delete_Click(object sender, EventArgs e)
         {
-            DialogResult option = MessageBox.Show("¿Desea eliminar el turno?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (option == DialogResult.Yes)
-            {
-                _appointments.RemoveAt(index);
-                index = -1;
-                ActualizeDataGrid(_appointments);
-                _appointmentController.SetAppointments(_appointments);
-            }
+            //index = dgv_appointments.CurrentCell.RowIndex;
+            //if(index >= 0)
+            //{
+                DialogResult option = MessageBox.Show("¿Desea eliminar el turno?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (option == DialogResult.Yes)
+                {
+                    Appointment selectedAppointment = _appointments[index];
+                    _appointments.RemoveAt(index);
+                    //index = -1;
+                    ActualizeDataGrid(_appointments);
+                    _appointmentController.Delete(selectedAppointment);
+                    _userLogs.MakeMovement("El usuario eliminó un turno");
+                    //_selectedAppointment = null;
+                }
+           // }
+            
         }       
     }
 }

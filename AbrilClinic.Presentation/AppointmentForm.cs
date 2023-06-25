@@ -1,5 +1,6 @@
 ﻿using Abril_Clinica.Models;
 using AbrilClinica.Entities.Database;
+using AbrilClinica.Entities.Logs;
 using AbrilClinica.Entities.Models;
 using AbrilClinica.Entities.Utilities;
 using Google.Type;
@@ -22,6 +23,7 @@ namespace AbrilClinica.UI
         private Patient _patient;
         private AppointmentController _appointmentController;
         private List<Appointment> _appointments;
+        private UserLogs _userLogs;
 
         /// <summary>
         /// initialize the form, instantiate the appointments controller and create a list
@@ -31,6 +33,7 @@ namespace AbrilClinica.UI
             InitializeComponent();
             _appointmentController = new AppointmentController();
             _appointments = new List<Appointment>();
+            _userLogs = new UserLogs();
         }
 
         /// <summary>
@@ -48,10 +51,10 @@ namespace AbrilClinica.UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void AppointmentForm_Load(object sender, EventArgs e)
+        private async void AppointmentForm_Load(object sender, EventArgs e)
         {
-            _appointmentController.CreateAppointments();
-            _appointments = _appointmentController.GetAppointments();
+            _userLogs.Movement += UserLogs.User_Movement;
+            _appointments = await _appointmentController.GetAppointments();
             this.dtp_appntDate.MinDate = new System.DateTime(2023, 5, 5, 0, 0, 0, 0);
             this.dtp_appntDate.MaxDate = new System.DateTime(2024, 12, 31, 0, 0, 0, 0);
             
@@ -62,15 +65,16 @@ namespace AbrilClinica.UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btn_request_Click(object sender, EventArgs e)
+        private async void btn_request_Click(object sender, EventArgs e)
         {
             int id = Appointment.NewIdAppointment(_appointments);
             if (Validator.IsDni(txb_dniPatient.Text, out int patientDni) && Validator.IsString(cbx_specialField.SelectedItem.ToString()!) && Validator.IsDniSameAsDniPatient(_patient.Dni, patientDni))
             {
                 Appointment appointment = new Appointment(id, patientDni, cbx_specialField.SelectedItem.ToString()!, dtp_appntDate.Value);
                 _appointments.Add(appointment);
-                _appointmentController.SetAppointments(_appointments);
+                await _appointmentController.Add(appointment);
                 MessageBox.Show("Turno agendado con éxito.");
+                _userLogs.MakeMovement("El usuario solicitó un turno");
             }
             else
             {

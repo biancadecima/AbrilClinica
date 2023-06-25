@@ -1,5 +1,6 @@
 ﻿using Abril_Clinica.Models;
 using AbrilClinica.Entities.Database;
+using AbrilClinica.Entities.Logs;
 using AbrilClinica.Entities.Utilities;
 using AbrilClinica.UI;
 using Google.Cloud.Firestore.V1;
@@ -23,6 +24,7 @@ namespace AbrilClinic.Presentation
         private Admin _admin;
         private PatientController _patientController;
         private AdminController _adminController;
+        private UserLogs _userLogs;
         int m, mx, my;
 
         /// <summary>
@@ -33,6 +35,7 @@ namespace AbrilClinic.Presentation
             InitializeComponent();
             _adminController= new AdminController();
             _patientController= new PatientController();
+            _userLogs = new UserLogs();
         }
 
         /// <summary>
@@ -50,8 +53,9 @@ namespace AbrilClinic.Presentation
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void MenuForm_Load(object sender, EventArgs e)
+        private async  void MenuForm_Load(object sender, EventArgs e)
         {
+            _userLogs.Movement += UserLogs.User_Movement;
             IsMdiContainer = true;
             if (Session.IsAnAdminSession(_user))
             {
@@ -59,16 +63,14 @@ namespace AbrilClinic.Presentation
                 btn_appointment.Visible = false;
                 btn_apptview.Visible = false;
                 btn_doclistview.Visible = false;
-                _adminController.CreateAdmins();
-                _admin = _adminController.GetAdminByUsername(_user.Username);
+                _admin = await _adminController.GetAdminByUsername(_user.Username);
             }
             else
             {
                 //es paciente
                 btn_apptmngmt.Visible = false;
                 btn_patientmngmt.Visible = false;
-                _patientController.CreatePatients();
-                _patient = _patientController.GetPatientByUsername(_user.Username);
+                _patient = await _patientController.GetPatientByUsername(_user.Username);
             }
 
         }
@@ -81,8 +83,8 @@ namespace AbrilClinic.Presentation
         private void btn_appointment_Click(object sender, EventArgs e)
         {
             var childAppointmentForm = new AppointmentForm(_patient);
+            _userLogs.MakeMovement("El usuario ingresó a Solicitud de Turnos");
             childAppointmentForm.TopLevel= false;
-         
             childAppointmentForm.MdiParent = this;
             childAppointmentForm.WindowState = FormWindowState.Maximized;
             childAppointmentForm.BringToFront();
@@ -102,6 +104,7 @@ namespace AbrilClinic.Presentation
         private void btn_apptview_Click(object sender, EventArgs e)
         {
             var childAppointmentListForm = new AppointmentListForm(_patient);
+            _userLogs.MakeMovement("El usuario ingresó a Mis Turnos Pendientes");
             childAppointmentListForm.MdiParent = this;
             childAppointmentListForm.WindowState = FormWindowState.Maximized;
             childAppointmentListForm.Dock = DockStyle.Fill;
@@ -120,6 +123,7 @@ namespace AbrilClinic.Presentation
         private void btn_doclistview_Click(object sender, EventArgs e)
         {
             var childDoctorListForm = new DoctorListForm();
+            _userLogs.MakeMovement("El usuario ingresó a Doctores Disponibles");
             childDoctorListForm.MdiParent = this;
             childDoctorListForm.WindowState = FormWindowState.Maximized;
             childDoctorListForm.Dock = DockStyle.Fill;
@@ -138,6 +142,7 @@ namespace AbrilClinic.Presentation
         private void btn_apptmngmt_Click(object sender, EventArgs e)
         {
             var childAppointmentDMForm = new AppointmentDMForm();
+            _userLogs.MakeMovement("El usuario ingresó a Gestión de Turnos");
             childAppointmentDMForm.MdiParent = this;
             childAppointmentDMForm.WindowState = FormWindowState.Maximized;
             childAppointmentDMForm.Dock = DockStyle.Fill;
@@ -156,6 +161,7 @@ namespace AbrilClinic.Presentation
         private void btn_patientmngmt_Click(object sender, EventArgs e)
         {
             var childPatientADMForm = new PatientADMForm();
+            _userLogs.MakeMovement("El usuario ingresó a Gestión de Pacientes");
             childPatientADMForm.MdiParent = this;
             childPatientADMForm.WindowState= FormWindowState.Maximized;
             childPatientADMForm.Dock = DockStyle.Fill;
@@ -173,6 +179,7 @@ namespace AbrilClinic.Presentation
         /// <param name="e"></param>
         private void btn_close_Click(object sender, EventArgs e)
         {
+            _userLogs.MakeMovement("El usuario cerró la aplicación");
             Application.Exit();
         }
 

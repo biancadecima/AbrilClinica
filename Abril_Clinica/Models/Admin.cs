@@ -1,6 +1,8 @@
-﻿using AbrilClinica.Entities.Utilities;
+﻿using AbrilClinica.Entities.Models;
+using AbrilClinica.Entities.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Net;
 using System.Runtime.CompilerServices;
@@ -18,6 +20,8 @@ namespace Abril_Clinica.Models
         public static bool isAdmin { get; }
         public int IdDoctor { get => _idDoctor; set => _idDoctor = value; }
         public string SpecialField { get => _specialField; set => _specialField = value; }
+
+        public Admin() { }
 
         /// <summary>
         /// initialize an admin with data
@@ -39,18 +43,16 @@ namespace Abril_Clinica.Models
         /// convert a string to a admin
         /// </summary>
         /// <param name="line"></param>
-        public static explicit operator Admin(string line)
+        public static explicit operator Admin(DataRow row)
         {
-            string separator = ",";
-            string[] row = line.Split(separator);
+            var name = row["Nombre"].ToString();
+            var surname = row["Apellido"].ToString();
+            var username = row["Usuario"].ToString();
+            var password = row["Contrasenia"].ToString();
+            var isAdmin = Convert.ToBoolean(row["EsAdmin"].ToString());
+            var idDoctor = Convert.ToInt32(row["IdDoctor"].ToString());
+            var specialfield = row["Especialidad"].ToString();
 
-            string name = row[0];
-            string surname = row[1];
-            string username = row[2];
-            string password = row[3];
-            bool isAdmin = Convert.ToBoolean(row[4]);
-            int idDoctor = Convert.ToInt32(row[5]);
-            string specialfield = row[6];
             Admin admin = new Admin(name, surname, username, password, isAdmin, idDoctor, specialfield);
 
             return admin;
@@ -73,12 +75,12 @@ namespace Abril_Clinica.Models
         /// </summary>
         /// <param name="line"></param>
         /// <returns></returns>
-        public override Parser Parse(string line)
-        {
-            Admin admin = (Admin)line;
-            return admin;
+        //public override Parser Parse(string line)
+        //{
+        //    Admin admin = (Admin)line;
+        //    return admin;
 
-        }
+        //}
     }
     
 }

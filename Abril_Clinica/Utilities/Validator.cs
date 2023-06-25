@@ -40,7 +40,7 @@ namespace AbrilClinica.Entities.Utilities
         { 
             if(Int32.TryParse(n, out dni))
             {
-                if(dni > 1000000)
+                if(dni > 8000000)
                 {
                     return true;
                 }

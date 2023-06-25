@@ -33,10 +33,9 @@ namespace AbrilClinica.UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void DoctorListForm_Load(object sender, EventArgs e)
+        private async void DoctorListForm_Load(object sender, EventArgs e)
         {
-            _adminController.CreateAdmins();
-            _admins = _adminController.GetAdmins();
+            _admins = await _adminController.GetAdmins();
             ActualizeDataGrid(_admins);
         }
 

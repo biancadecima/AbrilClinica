@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgv_patients = new System.Windows.Forms.DataGridView();
             this.lbl_title = new System.Windows.Forms.Label();
             this.btn_add = new System.Windows.Forms.Button();
@@ -46,6 +46,8 @@
             this.lbl_username = new System.Windows.Forms.Label();
             this.lbl_password = new System.Windows.Forms.Label();
             this.lbl_dni = new System.Windows.Forms.Label();
+            this.btn_JSONreport = new System.Windows.Forms.Button();
+            this.btn_CSVreport = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_patients)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,23 +60,23 @@
             this.dgv_patients.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgv_patients.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgv_patients.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.MidnightBlue;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.MidnightBlue;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_patients.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_patients.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgv_patients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.HotTrack;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.HotTrack;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_patients.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.HotTrack;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.HotTrack;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_patients.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgv_patients.EnableHeadersVisualStyles = false;
             this.dgv_patients.GridColor = System.Drawing.Color.White;
             this.dgv_patients.Location = new System.Drawing.Point(32, 253);
@@ -82,12 +84,12 @@
             this.dgv_patients.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dgv_patients.RowHeadersVisible = false;
             this.dgv_patients.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(74)))), ((int)(((byte)(173)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgv_patients.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(74)))), ((int)(((byte)(173)))));
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgv_patients.RowsDefaultCellStyle = dataGridViewCellStyle9;
             this.dgv_patients.RowTemplate.Height = 25;
             this.dgv_patients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_patients.Size = new System.Drawing.Size(1005, 293);
@@ -151,28 +153,28 @@
             // 
             // txb_name
             // 
-            this.txb_name.Location = new System.Drawing.Point(351, 120);
+            this.txb_name.Location = new System.Drawing.Point(344, 86);
             this.txb_name.Name = "txb_name";
             this.txb_name.Size = new System.Drawing.Size(169, 23);
             this.txb_name.TabIndex = 5;
             // 
             // txb_surname
             // 
-            this.txb_surname.Location = new System.Drawing.Point(579, 120);
+            this.txb_surname.Location = new System.Drawing.Point(579, 86);
             this.txb_surname.Name = "txb_surname";
             this.txb_surname.Size = new System.Drawing.Size(169, 23);
             this.txb_surname.TabIndex = 6;
             // 
             // txb_username
             // 
-            this.txb_username.Location = new System.Drawing.Point(351, 198);
+            this.txb_username.Location = new System.Drawing.Point(344, 198);
             this.txb_username.Name = "txb_username";
             this.txb_username.Size = new System.Drawing.Size(169, 23);
             this.txb_username.TabIndex = 7;
             // 
             // txb_dni
             // 
-            this.txb_dni.Location = new System.Drawing.Point(810, 120);
+            this.txb_dni.Location = new System.Drawing.Point(810, 86);
             this.txb_dni.Name = "txb_dni";
             this.txb_dni.Size = new System.Drawing.Size(169, 23);
             this.txb_dni.TabIndex = 8;
@@ -188,7 +190,7 @@
             // 
             this.lbl_name.AutoSize = true;
             this.lbl_name.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lbl_name.Location = new System.Drawing.Point(351, 92);
+            this.lbl_name.Location = new System.Drawing.Point(344, 67);
             this.lbl_name.Name = "lbl_name";
             this.lbl_name.Size = new System.Drawing.Size(65, 17);
             this.lbl_name.TabIndex = 10;
@@ -198,7 +200,7 @@
             // 
             this.lbl_surname.AutoSize = true;
             this.lbl_surname.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lbl_surname.Location = new System.Drawing.Point(579, 92);
+            this.lbl_surname.Location = new System.Drawing.Point(579, 67);
             this.lbl_surname.Name = "lbl_surname";
             this.lbl_surname.Size = new System.Drawing.Size(65, 17);
             this.lbl_surname.TabIndex = 11;
@@ -208,7 +210,7 @@
             // 
             this.lbl_username.AutoSize = true;
             this.lbl_username.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lbl_username.Location = new System.Drawing.Point(351, 175);
+            this.lbl_username.Location = new System.Drawing.Point(344, 178);
             this.lbl_username.Name = "lbl_username";
             this.lbl_username.Size = new System.Drawing.Size(58, 17);
             this.lbl_username.TabIndex = 12;
@@ -218,7 +220,7 @@
             // 
             this.lbl_password.AutoSize = true;
             this.lbl_password.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lbl_password.Location = new System.Drawing.Point(579, 175);
+            this.lbl_password.Location = new System.Drawing.Point(579, 178);
             this.lbl_password.Name = "lbl_password";
             this.lbl_password.Size = new System.Drawing.Size(88, 17);
             this.lbl_password.TabIndex = 13;
@@ -228,11 +230,41 @@
             // 
             this.lbl_dni.AutoSize = true;
             this.lbl_dni.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lbl_dni.Location = new System.Drawing.Point(810, 92);
+            this.lbl_dni.Location = new System.Drawing.Point(810, 67);
             this.lbl_dni.Name = "lbl_dni";
             this.lbl_dni.Size = new System.Drawing.Size(35, 17);
             this.lbl_dni.TabIndex = 14;
             this.lbl_dni.Text = "DNI:";
+            // 
+            // btn_JSONreport
+            // 
+            this.btn_JSONreport.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btn_JSONreport.FlatAppearance.BorderSize = 0;
+            this.btn_JSONreport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_JSONreport.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btn_JSONreport.ForeColor = System.Drawing.Color.White;
+            this.btn_JSONreport.Location = new System.Drawing.Point(810, 189);
+            this.btn_JSONreport.Name = "btn_JSONreport";
+            this.btn_JSONreport.Size = new System.Drawing.Size(189, 32);
+            this.btn_JSONreport.TabIndex = 15;
+            this.btn_JSONreport.Text = "Generar Informe JSON";
+            this.btn_JSONreport.UseVisualStyleBackColor = false;
+            this.btn_JSONreport.Click += new System.EventHandler(this.btn_JSONreport_Click);
+            // 
+            // btn_CSVreport
+            // 
+            this.btn_CSVreport.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btn_CSVreport.FlatAppearance.BorderSize = 0;
+            this.btn_CSVreport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_CSVreport.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btn_CSVreport.ForeColor = System.Drawing.Color.White;
+            this.btn_CSVreport.Location = new System.Drawing.Point(810, 144);
+            this.btn_CSVreport.Name = "btn_CSVreport";
+            this.btn_CSVreport.Size = new System.Drawing.Size(189, 32);
+            this.btn_CSVreport.TabIndex = 16;
+            this.btn_CSVreport.Text = "Generar Informe CSV";
+            this.btn_CSVreport.UseVisualStyleBackColor = false;
+            this.btn_CSVreport.Click += new System.EventHandler(this.btn_CSVreport_Click);
             // 
             // PatientADMForm
             // 
@@ -240,6 +272,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1067, 576);
+            this.Controls.Add(this.btn_CSVreport);
+            this.Controls.Add(this.btn_JSONreport);
             this.Controls.Add(this.lbl_dni);
             this.Controls.Add(this.lbl_password);
             this.Controls.Add(this.lbl_username);
@@ -282,5 +316,7 @@
         private Label lbl_username;
         private Label lbl_password;
         private Label lbl_dni;
+        private Button btn_JSONreport;
+        private Button btn_CSVreport;
     }
 }

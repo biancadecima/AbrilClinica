@@ -28,10 +28,18 @@ namespace AbrilClinica.Entities.Utilities
         /// <param name="users"></param>
         /// <param name="user"></param>
         /// <returns></returns>
-        public static bool UserExists(string username, List<User> users, out User user)
+        public static bool UserExists(string username, List<Patient> patients, List<Admin> admins, out User user)
         {
             user = null!;
-            foreach (var u in users)
+            foreach (var u in patients)
+            {
+                if (u.Username == username)
+                {
+                    user = u;
+                    return true;
+                }
+            }
+            foreach(var u in admins)
             {
                 if (u.Username == username)
                 {
