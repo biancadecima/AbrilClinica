@@ -60,16 +60,5 @@ namespace Abril_Clinica.Models
             sb.Append($",{Dni}");
             return sb.ToString();
         }
-
-        /// <summary>
-        /// parse into a patient
-        /// </summary>
-        /// <param name="line"></param>
-        /// <returns></returns>
-        //public override Parser Parse(string line)
-        //{
-        //    Patient patient = (Patient)line;
-        //    return patient;
-        //}
     }
 }

@@ -17,17 +17,19 @@ namespace AbrilClinica.Entities.ADO.NET
             _connectionString = "Server=DESKTOP-7LES993;Database=AbrilClinica;Trusted_Connection=True;";
         }
 
-        public ConnectionSQL()
-        {
-
-        }
-
+        /// <summary>
+        /// Opens the connenction
+        /// </summary>
+        /// <returns></returns>
         public async Task Open()
         {
             _connection = new SqlConnection(_connectionString);
             await _connection.OpenAsync();
         }
 
+        /// <summary>
+        /// Closes the connection
+        /// </summary>
         public void Close()
         {
             _connection.Close();

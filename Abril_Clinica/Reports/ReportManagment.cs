@@ -12,6 +12,12 @@ namespace AbrilClinica.Entities.Reports
     {
         public delegate void MakeReport<T>(List<T> list);
 
+        /// <summary>
+        /// encapsulates the SerializeObject method
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <returns></returns>
         public static string SerializeObject<T>(List<T> list)
         {
             string jsonData = JsonConvert.SerializeObject(list, Formatting.Indented);

@@ -69,18 +69,6 @@ namespace Abril_Clinica.Models
             sb.Append($",{IdDoctor},{SpecialField}");
             return sb.ToString();
         }
-
-        /// <summary>
-        /// parse into a admin
-        /// </summary>
-        /// <param name="line"></param>
-        /// <returns></returns>
-        //public override Parser Parse(string line)
-        //{
-        //    Admin admin = (Admin)line;
-        //    return admin;
-
-        //}
     }
     
 }

@@ -22,7 +22,7 @@ namespace AbrilClinica.Entities.Database
         }
 
         /// <summary>
-        /// reads the database and returns a list of patients
+        /// returns a list of all the patients in the database
         /// </summary>
         /// <returns></returns>
         public async Task<List<Patient>> GetPatients()
@@ -40,16 +40,31 @@ namespace AbrilClinica.Entities.Database
             return await _patientHandler.GetByUsername(username);
         }
 
+        /// <summary>
+        /// adds a patient to the database
+        /// </summary>
+        /// <param name="patient"></param>
+        /// <returns></returns>
         public async Task Add(Patient patient)
         {
             await _patientHandler.Add(patient);
         }
 
+        /// <summary>
+        /// Updates a patient in the database
+        /// </summary>
+        /// <param name="patient"></param>
+        /// <returns></returns>
         public async Task Update(Patient patient)
         {
             await _patientHandler.Update(patient);
         }
 
+        /// <summary>
+        /// Deletes a patient in the database
+        /// </summary>
+        /// <param name="patient"></param>
+        /// <returns></returns>
         public async Task Delete(Patient patient)
         {
             await _patientHandler.Delete(patient.Dni);

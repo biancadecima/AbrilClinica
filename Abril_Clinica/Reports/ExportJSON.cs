@@ -12,6 +12,10 @@ namespace AbrilClinica.Entities.Reports
 {
     public class ExportJSON : ReportManagment
     {
+        /// <summary>
+        /// serializes appointments and writes it in a json file
+        /// </summary>
+        /// <param name="appointments"></param>
         public static void AppointmentReportJSON(List<Appointment> appointments)
         {
             string jsonFilePath = "C:\\Users\\Urano\\source\\Decima_Labo2_PP\\PrimerParcial_Labo2\\Turnos.json";
@@ -21,13 +25,13 @@ namespace AbrilClinica.Entities.Reports
 
         }
 
+        /// <summary>
+        /// serializes patients and writes it in a json file
+        /// </summary>
+        /// <param name="patients"></param>
         public static void PatientReportJSON(List<Patient> patients)
         {
             string jsonFilePath = "C:\\Users\\Urano\\source\\Decima_Labo2_PP\\PrimerParcial_Labo2\\Pacientes.json";
-
-            // Serializar los datos a JSON y escribirlos en el archivo
-            //string jsonData = JsonConvert.SerializeObject(patients, Formatting.Indented);
-
             string jsonData = SerializeObject(patients);
             File.WriteAllText(jsonFilePath, jsonData);
 

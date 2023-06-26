@@ -11,6 +11,11 @@ namespace AbrilClinica.Entities.SQL
 {
     public class CommandSQL : ConnectionSQL
     {
+        /// <summary>
+        /// Open the connection with the database and encapsulates the sqlCommand
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
         public async Task<SqlCommand> CreateCommand(string query) 
         {
             await Open();
@@ -18,6 +23,11 @@ namespace AbrilClinica.Entities.SQL
             return command;
         }
 
+        /// <summary>
+        /// encapsulates the ExecuteReaderAsync and creates a datatable
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns></returns>
         public async Task<DataTable> ExecuteReader(SqlCommand c)
         {
             var reader = await c.ExecuteReaderAsync();
@@ -28,6 +38,11 @@ namespace AbrilClinica.Entities.SQL
             return dataTable;
         }
 
+        /// <summary>
+        /// encapsulates the ExecuteNonQueryAsync
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns></returns>
         public async Task ExecuteNonQuery(SqlCommand c)
         {
             await c.ExecuteNonQueryAsync();

@@ -77,12 +77,5 @@ namespace Abril_Clinica.Models
             sb.Append($"{Name},{Surname},{Username},{Password},{IsAdmin}");
             return sb.ToString();
         }
-
-        /// <summary>
-        /// parse into a user
-        /// </summary>
-        /// <param name="line"></param>
-        /// <returns></returns>
-
     }
 }

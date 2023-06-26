@@ -63,17 +63,7 @@ namespace AbrilClinica.Entities.Models
             return sb.ToString();
         }
 
-        /// <summary>
-        /// parse into an appointment
-        /// </summary>
-        /// <param name="line"></param>
-        /// <returns></returns>
-        //public override Parser Parse(string line)
-        //{
-        //    Appointment appointment = (Appointment)line;
-        //    return appointment;
-        //}
-
+       
         /// <summary>
         /// creates new unique id
         /// </summary>

@@ -10,6 +10,7 @@ using User = Abril_Clinica.Models.User;
 using System.ComponentModel.DataAnnotations;
 using System.Windows.Forms;
 using AbrilClinica.Entities.Logs;
+using static AbrilClinica.Entities.Logs.UserLogs;
 
 namespace AbrilClinic.Presentation
 {
@@ -37,7 +38,7 @@ namespace AbrilClinic.Presentation
         }
 
         /// <summary>
-        /// Creates users in case there aren't any and loads them into a list
+        /// subscribes to the event logs and loads the list of patients and admins
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -61,7 +62,7 @@ namespace AbrilClinic.Presentation
             {
                 if (Session.UserExists(tbx_username.Text, _patients, _admins, out _user) && Session.IsCorrectPassword(_user, tbx_password.Text))
                 {
-                    _userLogs.MakeMovement("El usuario ingresó en la aplicación");
+                    _userLogs.MakeMovement("El usuario ingreso en la aplicacion");
                     var principalMenu = new MenuForm(_user);
                     principalMenu.Show();
                     Hide(); 

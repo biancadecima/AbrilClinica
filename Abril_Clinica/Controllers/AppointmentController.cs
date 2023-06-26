@@ -23,7 +23,7 @@ namespace AbrilClinica.Entities.Database
         }
 
         /// <summary>
-        /// reads the database and returns a list of appointments
+        ///  create a list with all the appointments
         /// </summary>
         /// <returns></returns>
         public async Task<List<Appointment>> GetAppointments()
@@ -42,7 +42,7 @@ namespace AbrilClinica.Entities.Database
         } 
 
         /// <summary>
-        /// Write appointment to a database
+        /// Adds appointment to the database
         /// </summary>
         /// <param name="appointments"></param>
         public async Task Add(Appointment appointment)
@@ -50,11 +50,19 @@ namespace AbrilClinica.Entities.Database
             await _appointmentHandler.Add(appointment);
         }
 
+        /// <summary>
+        /// Updates an appointment in the database
+        /// </summary>
+        /// <param name="appointments"></param>
         public async Task Update(Appointment appointment)
         {
             await _appointmentHandler.Update(appointment);
         }
 
+        /// <summary>
+        /// Deletes an appointment in the database
+        /// </summary>
+        /// <param name="appointments"></param>
         public async Task Delete(Appointment appointment)
         {
             await _appointmentHandler.Delete(appointment.Id);

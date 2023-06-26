@@ -16,6 +16,11 @@ namespace AbrilClinica.Entities.Handlers
     {
         public AppointmentHandler() { }
 
+        /// <summary>
+        /// Adds an appointment to the database
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
         public async Task Add(Appointment entity)
         {
             string query = "INSERT INTO Turnos (Id, DniPaciente, Especialidad, Fecha)" +
@@ -30,6 +35,11 @@ namespace AbrilClinica.Entities.Handlers
             }
         }
 
+        /// <summary>
+        /// Deletes an appointment in the database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task Delete(int id)
         {
             string query = "DELETE FROM Turnos WHERE Id = @id";
@@ -40,6 +50,11 @@ namespace AbrilClinica.Entities.Handlers
             }    
         }
 
+        /// <summary>
+        /// Gets an appointment by its dni patient
+        /// </summary>
+        /// <param name="dniPatient"></param>
+        /// <returns></returns>
         public async Task<List<Appointment>> GetByDniPatient(int dniPatient)
         {
             var appointments = new List<Appointment>();
@@ -59,6 +74,10 @@ namespace AbrilClinica.Entities.Handlers
             return appointments;
         }
 
+        /// <summary>
+        /// Gets all the appointments in the database
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<Appointment>> GetAll()
         {
             var appointments = new List<Appointment>();
@@ -76,6 +95,11 @@ namespace AbrilClinica.Entities.Handlers
             return appointments;
         }
 
+        /// <summary>
+        /// Updates an appointment in the database
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
         public async Task Update(Appointment entity)
         {
             string query = "UPDATE Turnos SET Id = @id, DniPaciente = @dniPatient, Especialidad = @specialField, Fecha = @date WHERE Id = @id";

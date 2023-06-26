@@ -12,7 +12,10 @@ namespace AbrilClinica.Entities.Handlers
 {
     public class AdminHandler : CommandSQL
     {
-
+        /// <summary>
+        /// Gets all the admins in the database
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<Admin>> GetAll()
         {
             var admins = new List<Admin>();
@@ -30,6 +33,11 @@ namespace AbrilClinica.Entities.Handlers
             return admins;
         }
 
+        /// <summary>
+        /// Gets the admin in the database by its username
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
         public async Task<Admin> GetByUsername(string username)
         {
             Admin admin = new Admin();
