@@ -1,5 +1,4 @@
-﻿using Abril_Clinica.Models;
-using AbrilClinica.Entities.Models;
+﻿using AbrilClinica.Entities.Models;
 using AbrilClinica.Entities.Utilities;
 using Google.Type;
 using System;

@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AbrilClinica.Entities\AbrilClinica.Entities.csproj" />
     <ProjectReference Include="..\Abril_Clinica\AbrilClinica.Entities.csproj" />
   </ItemGroup>
 
